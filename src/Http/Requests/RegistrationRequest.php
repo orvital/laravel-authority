@@ -31,9 +31,9 @@ class RegistrationRequest extends FormRequest
         // $user = auth()->getProvider()->createModel()->create($this->validated());
 
         $user = Auth::guard()->getProvider()->createModel()->create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
         ]);
 
         event(new Registered($user));

@@ -12,81 +12,55 @@ use Illuminate\Validation\ValidationException;
 class LoginRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'email' => ['required', 'max:192', 'email'],
+            'password' => ['required', 'max:192'],
         ];
     }
 
     /**
      * Attempt to authenticate the request's credentials.
      *
-     * @return void
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate()
+    public function login(): void
     {
-        $this->ensureIsNotRateLimited();
+        $limiterKey = $this->throttleKey();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+        // Check if the request has too many failed login attempts.
+        if (RateLimiter::tooManyAttempts($limiterKey, 5)) {
+            event(new Lockout($this));
+
+            $seconds = RateLimiter::availableIn($limiterKey);
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => trans('auth.throttle', [
+                    'seconds' => $seconds,
+                    'minutes' => ceil($seconds / 60),
+                ]),
             ]);
         }
 
-        RateLimiter::clear($this->throttleKey());
-    }
+        // Attempt to authenticate a user using the given credentials.
+        if (! Auth::attempt($this->validated(), $this->boolean('remember'))) {
+            RateLimiter::hit($limiterKey);
 
-    /**
-     * Ensure the login request is not rate limited.
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function ensureIsNotRateLimited()
-    {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
-            return;
+            throw ValidationException::withMessages([
+                'email' => [trans('auth.failed')],
+            ]);
         }
 
-        event(new Lockout($this));
-
-        $seconds = RateLimiter::availableIn($this->throttleKey());
-
-        throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
-        ]);
+        RateLimiter::clear($limiterKey);
     }
 
     /**
      * Get the rate limiting throttle key for the request.
-     *
-     * @return string
      */
-    public function throttleKey()
+    public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
     }

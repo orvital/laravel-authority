@@ -28,8 +28,6 @@ class RegistrationRequest extends FormRequest
      */
     public function register(): void
     {
-        // $user = auth()->getProvider()->createModel()->create($this->validated());
-
         $user = Auth::guard()->getProvider()->createModel()->create([
             'name' => $this->name,
             'email' => $this->email,

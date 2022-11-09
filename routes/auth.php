@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Orvital\Auth\Http\Controllers\AuthenticatedSessionController;
 use Orvital\Auth\Http\Controllers\ConfirmablePasswordController;
-use Orvital\Auth\Http\Controllers\EmailVerificationNotificationController;
-use Orvital\Auth\Http\Controllers\EmailVerificationPromptController;
+use Orvital\Auth\Http\Controllers\EmailVerificationController;
 use Orvital\Auth\Http\Controllers\NewPasswordController;
 use Orvital\Auth\Http\Controllers\PasswordResetLinkController;
 use Orvital\Auth\Http\Controllers\RegisteredUserController;
@@ -25,9 +24,10 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');
+    Route::get('verify-email', [EmailVerificationController::class, 'create'])->name('verification.notice');
+    Route::post('verify-email', [EmailVerificationController::class, 'store'])->middleware('throttle:6,1');
+
     Route::get('verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
-    Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])->middleware('throttle:6,1')->name('verification.send');
 
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store'])->middleware('throttle:6,1');

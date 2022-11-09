@@ -3,9 +3,7 @@
 namespace Orvital\Auth;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 use Orvital\Auth\Passwords\PasswordBrokerManager;
 
@@ -16,6 +14,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/auth.php', 'auth'
+        );
+
         $this->registerPasswordBroker();
     }
 
@@ -25,6 +27,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+        Route::group(['middleware' => 'splade'], function () {
+            $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
+        });
 
         /**
          * Define default password rules

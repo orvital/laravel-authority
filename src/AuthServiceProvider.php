@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        Route::group(['middleware' => 'splade'], function () {
+        Route::group(['middleware' => ['web', 'splade']], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
         });
 

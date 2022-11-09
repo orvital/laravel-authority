@@ -36,7 +36,12 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = Auth::guard()->getProvider()->createModel()->create($this->validated());
+        // $user = Auth::guard()->getProvider()->createModel()->create($this->validated());
+        $user = Auth::guard()->getProvider()->createModel()->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
         event(new Registered($user));
 

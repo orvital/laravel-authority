@@ -17,6 +17,7 @@ abstract class User extends Model implements AuthenticatableContract, Authorizab
 {
     use Notifiable;
     use Authorizable;
+    use HasApiTokens;
     use Authenticatable;
     use MustVerifyEmail;
     use CanResetPassword;

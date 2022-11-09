@@ -5,6 +5,8 @@ namespace Orvital\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Laravel\Sanctum\Sanctum;
+use Orvital\Auth\Models\AccessToken;
 use Orvital\Auth\Passwords\PasswordBrokerManager;
 
 class AuthServiceProvider extends ServiceProvider
@@ -19,6 +21,10 @@ class AuthServiceProvider extends ServiceProvider
         );
 
         $this->registerPasswordBroker();
+
+        config(['sanctum.routes' => false]);
+
+        Sanctum::ignoreMigrations();
     }
 
     /**
@@ -42,6 +48,8 @@ class AuthServiceProvider extends ServiceProvider
                 ? $rule->mixedCase()->uncompromised()
                 : $rule;
         });
+
+        Sanctum::usePersonalAccessTokenModel(AccessToken::class);
     }
 
     /**

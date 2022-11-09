@@ -1,0 +1,33 @@
+{
+    "name": "orvital/laravel-splade-auth",
+    "description": "Laravel Splade Authentication",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Jona Goldman",
+            "email": "jonagoldman@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^9.3"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Orvital\\Auth\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Orvital\\Auth\\AuthServiceProvider"
+            ]
+        }
+    }
+}

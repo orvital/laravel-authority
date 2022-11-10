@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Notifications;
+namespace Orvital\Auth\Passwords\Notifications;
 
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;

@@ -10,7 +10,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
-use Orvital\Auth\Traits\CanResetPassword;
+use Orvital\Auth\Passwords\Traits\CanResetPassword;
 use Orvital\Auth\Traits\MustVerifyEmail;
 
 abstract class User extends Model implements AuthenticatableContract, AuthorizableContract, MustVerifyEmailContract, CanResetPasswordContract

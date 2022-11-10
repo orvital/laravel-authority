@@ -9,27 +9,27 @@ interface InviteBroker
     /**
      * Constant representing a successfully invite sent.
      */
-    public const INVITE_SENT = 'invite.sent';
+    public const INVITE_SENT = 'invites.sent';
 
     /**
      * Constant representing a successfully invite accepted.
      */
-    public const INVITE_ACCEPTED = 'invite.accepted';
+    public const INVITE_ACCEPTED = 'invites.accepted';
 
     /**
      * Constant representing the user not found response.
      */
-    public const INVALID_USER = 'invite.user';
+    public const INVALID_USER = 'invites.user';
 
     /**
      * Constant representing an invalid token.
      */
-    public const INVALID_TOKEN = 'invite.token';
+    public const INVALID_TOKEN = 'invites.token';
 
     /**
      * Constant representing a throttled attempt.
      */
-    public const RESET_THROTTLED = 'invite.throttled';
+    public const RESET_THROTTLED = 'invites.throttled';
 
     /**
      * Send the invite.

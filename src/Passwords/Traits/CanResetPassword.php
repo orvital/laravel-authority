@@ -1,8 +1,8 @@
 <?php
 
-namespace Orvital\Auth\Traits;
+namespace Orvital\Auth\Passwords\Traits;
 
-use Orvital\Auth\Notifications\ResetPassword as ResetPasswordNotification;
+use Orvital\Auth\Passwords\Notifications\ResetPassword as ResetPasswordNotification;
 
 trait CanResetPassword
 {

@@ -8,7 +8,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Laravel\Sanctum\Sanctum;
 use Orvital\Auth\Models\AccessToken;
-use Orvital\Auth\Passwords\PasswordBrokerManager;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,8 +20,6 @@ class AuthServiceProvider extends ServiceProvider
             __DIR__.'/../config/auth.php', 'auth'
         );
 
-        $this->registerPasswordBroker();
-
         config(['sanctum.routes' => false]);
 
         Sanctum::ignoreMigrations();
@@ -33,6 +30,12 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadTranslationsFrom(__DIR__.'/../lang', 'auth');
+
+        $this->publishes([
+            __DIR__.'/../lang' => $this->app->langPath('vendor/auth'),
+        ]);
+
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         Auth::provider('instance', function ($app, array $config) {
@@ -55,23 +58,5 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Sanctum::usePersonalAccessTokenModel(AccessToken::class);
-    }
-
-    /**
-     * Extend Laravel's default PasswordBrokerManager
-     *
-     * @see \Illuminate\Auth\Passwords\PasswordResetServiceProvider
-     */
-    protected function registerPasswordBroker(): void
-    {
-        /**
-         * The extend method registers a callback that is called each time the service is being resolved,
-         * allowing to modify or decorate the service instance before returning it.
-         * Extending instead of binding also prevents the service from beign overriden by a later binding,
-         * regardless if the original service is deferred or not binded to the container yet.
-         */
-        $this->app->extend('auth.password', function ($service, $app) {
-            return new PasswordBrokerManager($app);
-        });
     }
 }

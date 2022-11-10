@@ -31,7 +31,7 @@ class InviteUser extends Notification
     /**
      * Create a notification instance.
      */
-    public function __construct(string $token): void
+    public function __construct(string $token)
     {
         $this->token = $token;
     }

@@ -81,7 +81,8 @@ class InviteUser extends Notification
             ->action(Lang::get('Accept Invite'), $url)
             ->line(Lang::get('This link will expire in :count minutes.', [
                 'count' => config('auth.invites.'.config('auth.defaults.invites').'.expire'),
-            ]));
+            ]))
+            ->line(Lang::get('If you did not request an invite, no further action is required.'));
     }
 
     /**

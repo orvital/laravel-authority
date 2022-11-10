@@ -14,7 +14,7 @@ use Orvital\Auth\Invites\Facades\Invite;
 class InviteAcceptController extends Controller
 {
     /**
-     * Display the password reset view.
+     * Display the accept invite view.
      *
      * @return \Illuminate\View\View
      */
@@ -24,7 +24,7 @@ class InviteAcceptController extends Controller
     }
 
     /**
-     * Handle an incoming new password request.
+     * Handle an incoming accept request.
      *
      * @return \Illuminate\Http\RedirectResponse
      *
@@ -39,9 +39,9 @@ class InviteAcceptController extends Controller
             'password' => ['required', 'confirmed', PasswordRule::default()],
         ]);
 
-        // Here we will attempt to reset the user's password. If it is successful we
-        // will update the password on an actual user model and persist it to the
-        // database. Otherwise we will parse the error and return the response.
+        // Here we will attempt to accept the invite. If it is successful we
+        // will create a new user and persist it to the database.
+        Otherwise we will parse the error and return the response.
         $status = Invite::accept(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) use ($request) {
@@ -56,7 +56,7 @@ class InviteAcceptController extends Controller
             }
         );
 
-        // If the password was successfully reset, we will redirect the user back to
+        // If the invite was successfully accepted, we will redirect the user back to
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
         return $status == Invite::INVITE_ACCEPTED

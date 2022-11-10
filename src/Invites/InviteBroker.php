@@ -38,7 +38,7 @@ class InviteBroker implements InviteBrokerContract
     }
 
     /**
-     * TODO: should accept a mixed param (credentials array or model instance)
+     * Send the invite.
      */
     public function send(array $credentials, Closure $callback = null): string
     {
@@ -67,7 +67,7 @@ class InviteBroker implements InviteBrokerContract
     }
 
     /**
-     * TODO: should accept a mixed param (credentials array or model instance)
+     * Accept the invite.
      */
     public function accept(array $credentials, Closure $callback): mixed
     {
@@ -83,7 +83,7 @@ class InviteBroker implements InviteBrokerContract
 
         $password = $credentials['password'];
 
-        // Once the reset has been validated, we'll call the given callback with the
+        // Once the invite has been validated, we'll call the given callback with the
         // new password. This gives the user an opportunity to store the password
         // in their persistent storage. Then we'll delete the token and return.
         $callback($user, $password);

@@ -2,8 +2,8 @@
 
 namespace Orvital\Auth\Invites;
 
-use Orvital\Auth\Invites\Contracts\InviteBrokerFactory as FactoryContract;
 use InvalidArgumentException;
+use Orvital\Auth\Invites\Contracts\InviteBrokerFactory as FactoryContract;
 
 class InviteBrokerManager implements FactoryContract
 {
@@ -22,7 +22,7 @@ class InviteBrokerManager implements FactoryContract
     protected $brokers = [];
 
     /**
-     * Create a new PasswordBroker manager instance.
+     * Create a new broker manager instance.
      *
      * @param  \Illuminate\Contracts\Foundation\Application  $app
      * @return void
@@ -62,7 +62,7 @@ class InviteBrokerManager implements FactoryContract
         }
 
         // The invite broker uses a token repository to validate tokens and send user
-        // invite e-mails, as well as validating that password reset process as an
+        // invite e-mails, as well as validating that invite process as an
         // aggregate service of sorts providing a convenient interface for resets.
         return new InviteBroker(
             $this->createTokenRepository($config),
@@ -118,7 +118,7 @@ class InviteBrokerManager implements FactoryContract
     }
 
     /**
-     * Set the default password broker name.
+     * Set the default invite broker name.
      *
      * @param  string  $name
      * @return void

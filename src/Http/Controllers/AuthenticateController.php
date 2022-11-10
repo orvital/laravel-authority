@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Orvital\Auth\Http\Requests\LoginRequest;
 
-class AuthenticatedSessionController extends Controller
+class AuthenticateController extends Controller
 {
     /**
      * Display the login view.

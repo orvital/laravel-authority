@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class ConfirmablePasswordController extends Controller
+class PasswordConfirmationController extends Controller
 {
     /**
      * Show the confirm password view.
@@ -16,7 +16,7 @@ class ConfirmablePasswordController extends Controller
      */
     public function show(Request $request)
     {
-        return view('auth.confirm-password');
+        return view('auth.password-confirmation');
     }
 
     /**

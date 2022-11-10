@@ -11,10 +11,8 @@ class InviteUser extends Notification
 {
     /**
      * The invite token.
-     *
-     * @var string
      */
-    public $token;
+    public string $token;
 
     /**
      * The callback that should be used to create the invite URL.
@@ -32,33 +30,24 @@ class InviteUser extends Notification
 
     /**
      * Create a notification instance.
-     *
-     * @param  string  $token
-     * @return void
      */
-    public function __construct($token)
+    public function __construct(string $token): void
     {
         $this->token = $token;
     }
 
     /**
      * Get the notification's channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array|string
      */
-    public function via($notifiable)
+    public function via(mixed $notifiable): array|string
     {
         return ['mail'];
     }
 
     /**
      * Build the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail(mixed $notifiable): MailMessage
     {
         if (static::$toMailCallback) {
             return call_user_func(static::$toMailCallback, $notifiable, $this->token);
@@ -69,11 +58,8 @@ class InviteUser extends Notification
 
     /**
      * Get the accept invite notification mail message for the given URL.
-     *
-     * @param  string  $url
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    protected function buildMailMessage($url)
+    protected function buildMailMessage(string $url): MailMessage
     {
         return (new MailMessage())
             ->subject(Lang::get('Invite Received Notification'))
@@ -87,11 +73,8 @@ class InviteUser extends Notification
 
     /**
      * Get the accept URL for the given notifiable.
-     *
-     * @param  mixed  $notifiable
-     * @return string
      */
-    protected function acceptUrl($notifiable)
+    protected function acceptUrl(mixed $notifiable): string
     {
         if (static::$createUrlCallback) {
             return call_user_func(static::$createUrlCallback, $notifiable, $this->token);
@@ -107,9 +90,8 @@ class InviteUser extends Notification
      * Set a callback that should be used when creating the invite button URL.
      *
      * @param  \Closure(mixed, string): string  $callback
-     * @return void
      */
-    public static function createUrlUsing($callback)
+    public static function createUrlUsing($callback): void
     {
         static::$createUrlCallback = $callback;
     }
@@ -118,9 +100,8 @@ class InviteUser extends Notification
      * Set a callback that should be used when building the notification mail message.
      *
      * @param  \Closure(mixed, string): \Illuminate\Notifications\Messages\MailMessage  $callback
-     * @return void
      */
-    public static function toMailUsing($callback)
+    public static function toMailUsing($callback): void
     {
         static::$toMailCallback = $callback;
     }

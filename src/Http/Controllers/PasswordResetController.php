@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password as PasswordRule;
 
-class NewPasswordController extends Controller
+class PasswordResetController extends Controller
 {
     /**
      * Display the password reset view.
@@ -19,7 +19,7 @@ class NewPasswordController extends Controller
      */
     public function create(Request $request)
     {
-        return view('auth.reset-password', ['request' => $request]);
+        return view('auth.password-reset', ['request' => $request]);
     }
 
     /**

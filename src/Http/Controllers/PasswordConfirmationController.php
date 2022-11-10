@@ -4,8 +4,7 @@ namespace Orvital\Auth\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
+use Orvital\Auth\Http\Requests\PasswordConfirmRequest;
 
 class PasswordConfirmationController extends Controller
 {
@@ -24,19 +23,9 @@ class PasswordConfirmationController extends Controller
      *
      * @return mixed
      */
-    public function store(Request $request)
+    public function store(PasswordConfirmRequest $request)
     {
-        if (! Auth::guard('web')->validate([
-            'email' => $request->user()->email,
-            'password' => $request->password,
-        ])) {
-            throw ValidationException::withMessages([
-                'password' => __('auth.password'),
-            ]);
-        }
-
-        // $request->session()->put('auth.password_confirmed_at', time());
-        $request->session()->passwordConfirmed();
+        $request->confirm();
 
         return redirect()->intended(config('auth.home'));
     }

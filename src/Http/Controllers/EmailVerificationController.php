@@ -15,8 +15,8 @@ class EmailVerificationController extends Controller
     public function create(Request $request)
     {
         return $request->user()->hasVerifiedEmail()
-                    ? redirect()->intended(config('auth.home'))
-                    : view('auth.email-verification');
+            ? redirect()->intended(config('auth.home'))
+            : view('auth.email-verification');
     }
 
     /**

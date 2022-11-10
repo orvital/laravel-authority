@@ -5,6 +5,7 @@ namespace Orvital\Auth\Invites\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password as PasswordRule;
 use Orvital\Auth\Invites\Events\InviteAccepted;

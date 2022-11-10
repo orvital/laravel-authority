@@ -34,7 +34,7 @@ class InviteAcceptController extends Controller
         $request->validate([
             'token' => ['required', 'max:192'],
             'name' => ['required', 'string', 'max:192'],
-            'email' => ['required', 'max:192', 'email', Rule::unique('users')->ignore($this->user)],
+            'email' => ['required', 'max:192', 'email', Rule::unique('users')],
             'password' => ['required', 'confirmed', PasswordRule::default()],
         ]);
 

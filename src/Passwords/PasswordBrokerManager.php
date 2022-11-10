@@ -66,7 +66,7 @@ class PasswordBrokerManager implements FactoryContract
     {
         $key = $this->app['config']['app.key'];
 
-        if (Str::startsWith($key, 'base64:')) {
+        if (str_starts_with($key, 'base64:')) {
             $key = base64_decode(substr($key, 7));
         }
 

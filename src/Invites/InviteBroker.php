@@ -63,7 +63,7 @@ class InviteBroker implements InviteBrokerContract
             $user->sendInviteNotification($token);
         }
 
-        return static::INVALID_USER;
+        return static::INVITE_SENT;
     }
 
     /**

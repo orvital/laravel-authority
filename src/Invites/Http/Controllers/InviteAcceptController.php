@@ -41,7 +41,7 @@ class InviteAcceptController extends Controller
 
         // Here we will attempt to accept the invite. If it is successful we
         // will create a new user and persist it to the database.
-        Otherwise we will parse the error and return the response.
+        // Otherwise we will parse the error and return the response.
         $status = Invite::accept(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) use ($request) {

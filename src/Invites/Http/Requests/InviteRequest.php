@@ -1,0 +1,41 @@
+<?php
+
+namespace Orvital\Auth\Invites\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
+use Orvital\Auth\Invites\Facades\Invite;
+
+class InviteRequest extends FormRequest
+{
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'email' => ['required', 'max:192', 'email'],
+        ];
+    }
+
+    /**
+     * Send invite link.
+     */
+    public function sendInviteLink(): string
+    {
+        // We will send the password reset link to this user. Once we have attempted
+        // to send the link, we will examine the response then see the message we
+        // need to show to the user. Finally, we'll send out a proper response.
+        $response = Invite::send($this->validated());
+
+        if ($response !== Password::RESET_LINK_SENT) {
+            throw ValidationException::withMessages([
+                'email' => [trans($response)],
+            ]);
+        }
+
+        return trans($response);
+    }
+}

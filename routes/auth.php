@@ -8,6 +8,20 @@ use Orvital\Auth\Http\Controllers\NewPasswordController;
 use Orvital\Auth\Http\Controllers\PasswordResetLinkController;
 use Orvital\Auth\Http\Controllers\RegisteredUserController;
 use Orvital\Auth\Http\Controllers\VerifyEmailController;
+use Orvital\Auth\Invites\Http\Controllers\InviteAcceptController;
+use Orvital\Auth\Invites\Http\Controllers\InviteRequestController;
+
+Route::middleware('guest')->group(function () {
+    Route::controller(InviteRequestController::class)->group(function () {
+        Route::get('invite-request', 'create')->name('invite.request');
+        Route::post('invite-request', 'store');
+    });
+
+    Route::controller(InviteAcceptController::class)->group(function () {
+        Route::get('invite-accept/{token}', 'create')->name('invite.accept');
+        Route::post('invite-accept', 'store')->name('invite.update');
+    });
+});
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');

@@ -2,6 +2,7 @@
 
 namespace Orvital\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
@@ -33,6 +34,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+        Auth::provider('instance', function ($app, array $config) {
+            return new InstanceUserProvider($config['model']);
+        });
 
         Route::group(['middleware' => ['web', 'splade']], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');

@@ -27,7 +27,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Orvital\\Auth\\AuthServiceProvider"
+                "Orvital\\Auth\\AuthServiceProvider",
+                "Orvital\\Auth\\Invites\\InviteServiceProvider"
             ]
         }
     }

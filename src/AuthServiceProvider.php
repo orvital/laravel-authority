@@ -38,12 +38,15 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        Auth::provider('instance', function ($app, array $config) {
-            return new InstanceUserProvider($config['model']);
-        });
-
         Route::group(['middleware' => ['web', 'splade']], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes/invites.php');
+        });
+
+        Sanctum::usePersonalAccessTokenModel(AccessToken::class);
+
+        Auth::provider('instance', function ($app, array $config) {
+            return new InstanceUserProvider($config['model']);
         });
 
         /**
@@ -56,7 +59,5 @@ class AuthServiceProvider extends ServiceProvider
                 ? $rule->mixedCase()->uncompromised()
                 : $rule;
         });
-
-        Sanctum::usePersonalAccessTokenModel(AccessToken::class);
     }
 }

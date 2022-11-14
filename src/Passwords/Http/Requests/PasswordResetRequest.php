@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Http\Requests;
+namespace Orvital\Auth\Passwords\Http\Requests;
 
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Http\FormRequest;
@@ -38,6 +38,7 @@ class PasswordResetRequest extends FormRequest
                 $user->password = Hash::make($password);
                 $user->setRememberToken(Str::random(60));
                 $user->save();
+
                 event(new PasswordReset($user));
             });
 

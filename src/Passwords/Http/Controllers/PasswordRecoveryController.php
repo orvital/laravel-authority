@@ -1,11 +1,10 @@
 <?php
 
-namespace Orvital\Auth\Http\Controllers;
+namespace Orvital\Auth\Passwords\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Password;
-use Orvital\Auth\Http\Requests\PasswordRecoverRequest;
+use Orvital\Auth\Passwords\Http\Requests\PasswordRecoverRequest;
 
 class PasswordRecoveryController extends Controller
 {

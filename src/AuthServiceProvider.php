@@ -40,7 +40,9 @@ class AuthServiceProvider extends ServiceProvider
 
         Route::group(['middleware' => ['web', 'splade']], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes/emails.php');
             $this->loadRoutesFrom(__DIR__.'/../routes/invites.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes/passwords.php');
         });
 
         Sanctum::usePersonalAccessTokenModel(AccessToken::class);

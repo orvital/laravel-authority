@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Http\Controllers;
+namespace Orvital\Auth\Emails\Http\Controllers;
 
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;

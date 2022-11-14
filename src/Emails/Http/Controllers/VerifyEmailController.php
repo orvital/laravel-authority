@@ -2,9 +2,8 @@
 
 namespace Orvital\Auth\Emails\Http\Controllers;
 
-use Illuminate\Auth\Events\Verified;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Routing\Controller;
+use Orvital\Auth\Emails\Http\Requests\EmailVerifyRequest;
 
 class VerifyEmailController extends Controller
 {
@@ -13,15 +12,9 @@ class VerifyEmailController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function __invoke(EmailVerificationRequest $request)
+    public function __invoke(EmailVerifyRequest $request)
     {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(config('authority.home').'?verified=1');
-        }
-
-        if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
-        }
+        $request->fulfill();
 
         return redirect()->intended(config('authority.home').'?verified=1');
     }

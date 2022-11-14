@@ -17,12 +17,27 @@ class AuthServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/auth.php', 'auth'
-        );
-
-        $this->mergeConfigFrom(
             __DIR__.'/../config/authority.php', 'authority'
         );
+
+        // set configuration values at runtime
+        config(['auth.defaults.invites' => 'users']);
+
+        config([
+            'auth.providers.guests' => [
+                'driver' => 'instance',
+                'model' => config('auth.providers.users.model'),
+            ],
+        ]);
+
+        config([
+            'auth.invites.users' => array_merge([
+                'provider' => 'guests',
+                'table' => 'invite_tokens',
+                'expire' => 60,
+                'throttle' => 60,
+            ], config('auth.invites.users', [])),
+        ]);
 
         config(['sanctum.routes' => false]);
 

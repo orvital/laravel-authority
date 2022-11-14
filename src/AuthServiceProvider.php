@@ -43,7 +43,10 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__.'/../lang', 'auth');
 
-        Route::group(['middleware' => config('authority.middleware')], function () {
+        Route::group([
+            'middleware' => config('authority.middleware'),
+            'prefix' => 'auth',
+        ], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
             $this->loadRoutesFrom(__DIR__.'/../routes/emails.php');
             $this->loadRoutesFrom(__DIR__.'/../routes/invites.php');

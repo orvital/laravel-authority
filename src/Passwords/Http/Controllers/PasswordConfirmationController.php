@@ -27,6 +27,6 @@ class PasswordConfirmationController extends Controller
     {
         $request->confirm();
 
-        return redirect()->intended(config('auth.home'));
+        return redirect()->intended(config('authority.home'));
     }
 }

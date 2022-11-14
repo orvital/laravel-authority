@@ -131,15 +131,4 @@ return [
 
     'password_timeout' => 10800,
 
-    /*
-    |--------------------------------------------------------------------------
-    | The path to the "home" route for your application.
-    |--------------------------------------------------------------------------
-    |
-    | Typically, users are redirected here after authentication.
-    |
-    */
-
-    'home' => '/dashboard',
-
 ];

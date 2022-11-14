@@ -29,6 +29,6 @@ class RegisterController extends Controller
     {
         $request->register();
 
-        return redirect(config('auth.home'));
+        return redirect(config('authority.home'));
     }
 }

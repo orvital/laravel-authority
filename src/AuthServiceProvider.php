@@ -20,6 +20,10 @@ class AuthServiceProvider extends ServiceProvider
             __DIR__.'/../config/auth.php', 'auth'
         );
 
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/authority.php', 'authority'
+        );
+
         config(['sanctum.routes' => false]);
 
         Sanctum::ignoreMigrations();
@@ -30,15 +34,16 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__.'/../lang', 'auth');
-
         $this->publishes([
             __DIR__.'/../lang' => $this->app->langPath('vendor/auth'),
+            __DIR__.'/../config/authority.php' => config_path('authority.php'),
         ]);
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        Route::group(['middleware' => ['web', 'splade']], function () {
+        $this->loadTranslationsFrom(__DIR__.'/../lang', 'auth');
+
+        Route::group(['middleware' => config('authority.middleware')], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
             $this->loadRoutesFrom(__DIR__.'/../routes/emails.php');
             $this->loadRoutesFrom(__DIR__.'/../routes/invites.php');

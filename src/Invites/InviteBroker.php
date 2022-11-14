@@ -47,6 +47,8 @@ class InviteBroker implements InviteBrokerContract
         // "flash" data in the session to indicate to the developers the errors.
         $user = $this->getUser($credentials);
 
+        // return $this->users->createModel()->make($credentials);
+
         if (! $user) {
             return static::INVALID_USER;
         }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Orvital\Auth\Http\Controllers\AccessTokenController;
 use Orvital\Auth\Http\Controllers\AuthenticateController;
 use Orvital\Auth\Http\Controllers\RegisterController;
 
@@ -19,5 +20,11 @@ Route::middleware('guest')->group(function () {
 $authMiddleware = config('authority.guard') ? 'auth:'.config('authority.guard') : 'auth';
 
 Route::middleware($authMiddleware)->group(function () {
+    Route::controller(AccessTokenController::class)->group(function () {
+        Route::get('token', 'index')->name('token.index');
+        Route::post('token', 'store')->name('token.store');
+        Route::delete('token/{token}', 'destroy')->name('token.destroy');
+    });
+
     Route::post('logout', [AuthenticateController::class, 'destroy'])->name('logout');
 });

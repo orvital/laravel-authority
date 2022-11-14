@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Orvital\Auth\Emails\Traits\MustVerifyEmail;
 use Orvital\Auth\Invites\Contracts\CanBeInvited as CanBeInvitedContract;
 use Orvital\Auth\Invites\Traits\CanBeInvited;
@@ -19,6 +20,7 @@ abstract class User extends Model implements AuthenticatableContract, Authorizab
 {
     use Notifiable;
     use Authorizable;
+    use HasApiTokens;
     use CanBeInvited;
     use Authenticatable;
     use MustVerifyEmail;

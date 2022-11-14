@@ -17,7 +17,9 @@ Route::middleware('guest')->group(function () {
     });
 });
 
-Route::middleware('auth')->group(function () {
+$authMiddleware = config('authority.guard') ? 'auth:'.config('authority.guard') : 'auth';
+
+Route::middleware($authMiddleware)->group(function () {
     Route::controller(PasswordConfirmationController::class)->group(function () {
         Route::get('confirmation', 'show')->name('password.confirm');
         Route::post('confirmation', 'store')->middleware('throttle:6,1');

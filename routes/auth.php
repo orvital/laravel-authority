@@ -16,6 +16,8 @@ Route::middleware('guest')->group(function () {
     });
 });
 
-Route::middleware('auth')->group(function () {
+$authMiddleware = config('authority.guard') ? 'auth:'.config('authority.guard') : 'auth';
+
+Route::middleware($authMiddleware)->group(function () {
     Route::post('logout', [AuthenticateController::class, 'destroy'])->name('logout');
 });

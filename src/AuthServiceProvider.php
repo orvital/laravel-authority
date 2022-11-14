@@ -45,7 +45,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Route::group([
             'middleware' => config('authority.middleware'),
-            'prefix' => 'auth',
+            'prefix' => config('authority.prefix'),
         ], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
             $this->loadRoutesFrom(__DIR__.'/../routes/emails.php');

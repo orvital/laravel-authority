@@ -3,6 +3,7 @@
 namespace Orvital\Auth\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class AccessTokenController extends Controller
 {
@@ -37,11 +38,9 @@ class AccessTokenController extends Controller
     /**
      * Delete the given API token.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $tokenId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request, $tokenId)
+    public function destroy(Request $request, string $tokenId)
     {
         $request->user()->tokens()->where('id', $tokenId)->first()->delete();
 

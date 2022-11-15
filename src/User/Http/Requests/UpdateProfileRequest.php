@@ -22,7 +22,7 @@ class UpdateProfileRequest extends FormRequest
     /**
      * Set password confirmation time.
      */
-    public function updateProfile()
+    public function updateProfile(): bool
     {
         $user = $this->user();
 
@@ -31,11 +31,15 @@ class UpdateProfileRequest extends FormRequest
         if ($user->isDirty('email') && $user instanceof MustVerifyEmail) {
             $user->forceFill([
                 $user->getVerifiedAtColumn() => null,
-            ]);
+            ])->save();
 
             $user->sendEmailVerificationNotification();
+
+            return true;
         }
 
         $user->save();
+
+        return false;
     }
 }

@@ -29,9 +29,12 @@ class UserProfileController extends Controller
      */
     public function update(UpdateProfileRequest $request)
     {
-        $request->updateProfile();
+        $emailResent = $request->updateProfile();
 
-        return back()->with('profile', 'profile-information-updated');
+        return back()->with([
+            'profile' => __('Profile Updated'),
+            'resent' => $emailResent,
+        ]);
     }
 
     /**
@@ -43,6 +46,6 @@ class UserProfileController extends Controller
     {
         $request->updatePassword();
 
-        return back()->with('password', 'password-updated');
+        return back()->with('password', __('Password Updated'));
     }
 }

@@ -6,14 +6,9 @@ use Orvital\Authority\Email\Notifications\VerifyEmail as VerifyEmailNotification
 
 trait MustVerifyEmail
 {
-    /**
-     * The name of the "verified_at" column.
-     */
-    const string VERIFIED_AT = 'verified_at';
-
     public function getVerifiedAtColumn()
     {
-        return static::VERIFIED_AT;
+        return 'verified_at';
     }
 
     /**

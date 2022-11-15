@@ -31,10 +31,7 @@ class UserProfileController extends Controller
     {
         $emailResent = $request->updateProfile();
 
-        return back()->with([
-            'profile' => __('Profile Updated'),
-            'resent' => $emailResent,
-        ]);
+        return back()->with('profile', __('Profile Updated'));
     }
 
     /**

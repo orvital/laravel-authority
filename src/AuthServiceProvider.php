@@ -20,26 +20,7 @@ class AuthServiceProvider extends ServiceProvider
             __DIR__.'/../config/authority.php', 'authority'
         );
 
-        // set configuration values at runtime
-        config(['auth.defaults.invites' => 'users']);
-
-        config([
-            'auth.providers.guests' => [
-                'driver' => 'instance',
-                'model' => config('auth.providers.users.model'),
-            ],
-        ]);
-
-        config([
-            'auth.invites.users' => array_merge([
-                'provider' => 'guests',
-                'table' => 'invite_tokens',
-                'expire' => 60,
-                'throttle' => 60,
-            ], config('auth.invites.users', [])),
-        ]);
-
-        config(['sanctum.routes' => false]);
+        $this->setConfigurationValues();
 
         Sanctum::ignoreMigrations();
     }
@@ -84,5 +65,31 @@ class AuthServiceProvider extends ServiceProvider
                 ? $rule->mixedCase()->uncompromised()
                 : $rule;
         });
+    }
+
+    /**
+     * Set configuration values at runtime.
+     */
+    protected function setConfigurationValues(): void
+    {
+        config(['auth.defaults.invites' => 'users']);
+
+        config([
+            'auth.providers.guests' => [
+                'driver' => 'instance',
+                'model' => config('auth.providers.users.model'),
+            ],
+        ]);
+
+        config([
+            'auth.invites.users' => array_merge([
+                'provider' => 'guests',
+                'table' => 'invite_tokens',
+                'expire' => 60,
+                'throttle' => 60,
+            ], config('auth.invites.users', [])),
+        ]);
+
+        config(['sanctum.routes' => false]);
     }
 }

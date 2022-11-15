@@ -23,7 +23,7 @@ class UserProfileController extends Controller
     }
 
     /**
-     * Update the user profile.
+     * Update the user name and email.
      *
      * @return \Illuminate\Http\RedirectResponse
      */

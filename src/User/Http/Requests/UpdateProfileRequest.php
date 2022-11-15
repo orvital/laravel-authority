@@ -8,8 +8,6 @@ use Illuminate\Validation\Rule;
 
 class UpdateProfileRequest extends FormRequest
 {
-    public bool $verificationLinkSent = false;
-
     /**
      * Get the validation rules that apply to the request.
      */
@@ -22,7 +20,7 @@ class UpdateProfileRequest extends FormRequest
     }
 
     /**
-     * Set password confirmation time.
+     * Update profile
      */
     public function updateProfile(): array
     {
@@ -45,5 +43,29 @@ class UpdateProfileRequest extends FormRequest
         $user->save();
 
         return $response;
+    }
+
+    /**
+     * Set password confirmation time.
+     */
+    public function resendEmail(): array
+    {
+        if ($this->user()->hasVerifiedEmail()) {
+            return back()->with('status', 'verification-link-sent');
+        }
+
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('status', 'verification-link-sent');
+
+        $user = $this->user()->forceFill($this->validated());
+
+        if ($this->user()->hasVerifiedEmail()) {
+            return redirect()->intended(config('authority.home'));
+        }
+
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('status', 'verification-link-sent');
     }
 }

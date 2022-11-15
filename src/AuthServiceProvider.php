@@ -31,8 +31,8 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../lang' => $this->app->langPath('vendor/auth'),
-            __DIR__.'/../config/authority.php' => config_path('authority.php'),
+            __DIR__.'/../lang' => $this->app->langPath(),
+            __DIR__.'/../config/authority.php' => $this->app->config_path('authority.php'),
         ]);
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');

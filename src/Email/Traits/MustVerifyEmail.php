@@ -7,12 +7,22 @@ use Orvital\Authority\Email\Notifications\VerifyEmail as VerifyEmailNotification
 trait MustVerifyEmail
 {
     /**
+     * The name of the "verified_at" column.
+     */
+    const string VERIFIED_AT = 'verified_at';
+
+    public function getVerifiedAtColumn()
+    {
+        return static::VERIFIED_AT;
+    }
+
+    /**
      * Initializer called on each new model instance.
      */
     public function initializeMustVerifyEmail(): void
     {
-        if (! $this->hasCast('verified_at')) {
-            $this->mergeCasts(['verified_at' => 'datetime']);
+        if (! $this->hasCast($this->getVerifiedAtColumn())) {
+            $this->mergeCasts([$this->getVerifiedAtColumn() => 'datetime']);
         }
     }
 
@@ -23,7 +33,7 @@ trait MustVerifyEmail
      */
     public function hasVerifiedEmail()
     {
-        return ! is_null($this->verified_at);
+        return ! is_null($this->{$this->getVerifiedAtColumn()});
     }
 
     /**
@@ -34,7 +44,7 @@ trait MustVerifyEmail
     public function markEmailAsVerified()
     {
         return $this->forceFill([
-            'verified_at' => $this->freshTimestamp(),
+            $this->getVerifiedAtColumn() => $this->freshTimestamp(),
         ])->save();
     }
 

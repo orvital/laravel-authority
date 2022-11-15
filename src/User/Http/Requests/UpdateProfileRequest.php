@@ -30,7 +30,7 @@ class UpdateProfileRequest extends FormRequest
 
         if ($user->isDirty('email') && $user instanceof MustVerifyEmail) {
             $user->forceFill([
-                'email_verified_at' => null,
+                $user->getVerifiedAtColumn() => null,
             ]);
 
             $user->sendEmailVerificationNotification();

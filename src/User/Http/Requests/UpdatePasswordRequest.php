@@ -34,10 +34,12 @@ class UpdatePasswordRequest extends FormRequest
     /**
      * Set password confirmation time.
      */
-    public function updatePassword()
+    public function updatePassword(): array
     {
         $this->user()->forceFill([
             'password' => Hash::make($this->validated('password')),
         ])->save();
+
+        return ['password' => __('Password Updated')];
     }
 }

@@ -29,9 +29,7 @@ class UserProfileController extends Controller
      */
     public function update(UpdateProfileRequest $request)
     {
-        $emailResent = $request->updateProfile();
-
-        return back()->with('profile', __('Profile Updated'));
+        return back()->with($request->updateProfile());
     }
 
     /**
@@ -41,8 +39,6 @@ class UserProfileController extends Controller
      */
     public function store(UpdatePasswordRequest $request)
     {
-        $request->updatePassword();
-
-        return back()->with('password', __('Password Updated'));
+        return back()->with($request->updatePassword());
     }
 }

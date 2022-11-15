@@ -8,6 +8,8 @@ use Illuminate\Validation\Rule;
 
 class UpdateProfileRequest extends FormRequest
 {
+    public bool $verificationLinkSent = false;
+
     /**
      * Get the validation rules that apply to the request.
      */
@@ -22,24 +24,26 @@ class UpdateProfileRequest extends FormRequest
     /**
      * Set password confirmation time.
      */
-    public function updateProfile(): bool
+    public function updateProfile(): array
     {
-        $user = $this->user();
+        $user = $this->user()->forceFill($this->validated());
 
-        $user->forceFill($this->validated());
+        $response = [
+            'profile' => __('Profile Updated'),
+        ];
 
         if ($user->isDirty('email') && $user instanceof MustVerifyEmail) {
             $user->forceFill([
                 $user->getVerifiedAtColumn() => null,
-            ])->save();
+            ]);
 
             $user->sendEmailVerificationNotification();
 
-            return true;
+            $response['resend'] = __('A new verification link has been sent to your email address.');
         }
 
         $user->save();
 
-        return false;
+        return $response;
     }
 }

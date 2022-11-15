@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Laravel\Sanctum\Sanctum;
-use Orvital\Authority\Models\AccessToken;
+use Orvital\Authority\User\Models\AccessToken;
 
 class AuthorityServiceProvider extends ServiceProvider
 {
@@ -44,9 +44,10 @@ class AuthorityServiceProvider extends ServiceProvider
             'prefix' => config('authority.prefix'),
         ], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
-            $this->loadRoutesFrom(__DIR__.'/../routes/emails.php');
-            $this->loadRoutesFrom(__DIR__.'/../routes/invites.php');
-            $this->loadRoutesFrom(__DIR__.'/../routes/passwords.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes/email.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes/invite.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes/password.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes/user.php');
         });
 
         Sanctum::usePersonalAccessTokenModel(AccessToken::class);

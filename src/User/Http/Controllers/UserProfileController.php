@@ -31,7 +31,7 @@ class UserProfileController extends Controller
     {
         $request->updateProfile();
 
-        return back()->with('status', 'profile-information-updated');
+        return back()->with('profile', 'profile-information-updated');
     }
 
     /**
@@ -43,6 +43,6 @@ class UserProfileController extends Controller
     {
         $request->updatePassword();
 
-        return back()->with('status', 'password-updated');
+        return back()->with('password', 'password-updated');
     }
 }

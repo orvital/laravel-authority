@@ -1,9 +1,9 @@
 <?php
 
-namespace Orvital\Auth\Emails\Http\Controllers;
+namespace Orvital\Authority\Emails\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use Orvital\Auth\Emails\Http\Requests\EmailVerifyRequest;
+use Orvital\Authority\Emails\Http\Requests\EmailVerifyRequest;
 
 class VerifyEmailController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Passwords;
+namespace Orvital\Authority\Passwords;
 
 use Illuminate\Auth\Passwords\TokenRepositoryInterface;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;

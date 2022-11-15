@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Orvital\Auth\Invites\Http\Controllers\InviteAcceptController;
-use Orvital\Auth\Invites\Http\Controllers\InviteRequestController;
+use Orvital\Authority\Invites\Http\Controllers\InviteAcceptController;
+use Orvital\Authority\Invites\Http\Controllers\InviteRequestController;
 
 Route::middleware('guest')->group(function () {
     Route::controller(InviteRequestController::class)->group(function () {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Orvital\Auth;
+namespace Orvital\Authority;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Laravel\Sanctum\Sanctum;
-use Orvital\Auth\Models\AccessToken;
+use Orvital\Authority\Models\AccessToken;
 
-class AuthServiceProvider extends ServiceProvider
+class AuthorityServiceProvider extends ServiceProvider
 {
     /**
      * Register the application services.

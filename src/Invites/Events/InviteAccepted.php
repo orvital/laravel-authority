@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Invites\Events;
+namespace Orvital\Authority\Invites\Events;
 
 use Illuminate\Queue\SerializesModels;
 

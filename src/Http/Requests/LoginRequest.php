@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Http\Requests;
+namespace Orvital\Authority\Http\Requests;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;

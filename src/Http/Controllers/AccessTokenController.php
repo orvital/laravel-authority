@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Http\Controllers;
+namespace Orvital\Authority\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

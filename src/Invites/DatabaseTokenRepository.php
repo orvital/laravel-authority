@@ -1,9 +1,9 @@
 <?php
 
-namespace Orvital\Auth\Invites;
+namespace Orvital\Authority\Invites;
 
-use Orvital\Auth\Invites\Contracts\CanBeInvited as CanBeInvitedContract;
-use Orvital\Auth\Invites\Contracts\TokenRepository as TokenRepositoryContract;
+use Orvital\Authority\Invites\Contracts\CanBeInvited as CanBeInvitedContract;
+use Orvital\Authority\Invites\Contracts\TokenRepository as TokenRepositoryContract;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Builder;

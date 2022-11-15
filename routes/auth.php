@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Orvital\Auth\Http\Controllers\AccessTokenController;
-use Orvital\Auth\Http\Controllers\AuthenticateController;
-use Orvital\Auth\Http\Controllers\RegisterController;
+use Orvital\Authority\Http\Controllers\AccessTokenController;
+use Orvital\Authority\Http\Controllers\AuthenticateController;
+use Orvital\Authority\Http\Controllers\RegisterController;
 
 Route::middleware('guest')->group(function () {
     Route::controller(RegisterController::class)->group(function () {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Passwords;
+namespace Orvital\Authority\Passwords;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;

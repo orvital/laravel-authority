@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Orvital\Auth\Emails\Http\Controllers\EmailVerificationController;
-use Orvital\Auth\Emails\Http\Controllers\VerifyEmailController;
+use Orvital\Authority\Emails\Http\Controllers\EmailVerificationController;
+use Orvital\Authority\Emails\Http\Controllers\VerifyEmailController;
 
 $authMiddleware = config('authority.guard') ? 'auth:'.config('authority.guard') : 'auth';
 

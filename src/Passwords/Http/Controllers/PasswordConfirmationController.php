@@ -1,10 +1,10 @@
 <?php
 
-namespace Orvital\Auth\Passwords\Http\Controllers;
+namespace Orvital\Authority\Passwords\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Orvital\Auth\Passwords\Http\Requests\PasswordConfirmRequest;
+use Orvital\Authority\Passwords\Http\Requests\PasswordConfirmRequest;
 
 class PasswordConfirmationController extends Controller
 {

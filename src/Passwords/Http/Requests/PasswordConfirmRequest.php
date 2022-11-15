@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Passwords\Http\Requests;
+namespace Orvital\Authority\Passwords\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;

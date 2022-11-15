@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Passwords\Http\Requests;
+namespace Orvital\Authority\Passwords\Http\Requests;
 
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Http\FormRequest;

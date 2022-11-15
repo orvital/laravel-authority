@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Models;
+namespace Orvital\Authority\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Orvital\Auth\Emails\Traits\MustVerifyEmail;
-use Orvital\Auth\Invites\Contracts\CanBeInvited as CanBeInvitedContract;
-use Orvital\Auth\Invites\Traits\CanBeInvited;
-use Orvital\Auth\Passwords\Traits\CanResetPassword;
+use Orvital\Authority\Emails\Traits\MustVerifyEmail;
+use Orvital\Authority\Invites\Contracts\CanBeInvited as CanBeInvitedContract;
+use Orvital\Authority\Invites\Traits\CanBeInvited;
+use Orvital\Authority\Passwords\Traits\CanResetPassword;
 
 abstract class User extends Model implements AuthenticatableContract, AuthorizableContract, MustVerifyEmailContract, CanResetPasswordContract, CanBeInvitedContract
 {

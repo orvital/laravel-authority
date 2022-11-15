@@ -1,10 +1,10 @@
 <?php
 
-namespace Orvital\Auth\Http\Controllers;
+namespace Orvital\Authority\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Orvital\Auth\Http\Requests\RegistrationRequest;
+use Orvital\Authority\Http\Requests\RegistrationRequest;
 
 class RegisterController extends Controller
 {

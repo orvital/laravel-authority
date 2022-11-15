@@ -1,6 +1,6 @@
 {
-    "name": "orvital/laravel-splade-auth",
-    "description": "Laravel Splade Authentication",
+    "name": "orvital/laravel-authority",
+    "description": "Custom Authentication for Laravel",
     "type": "library",
     "license": "proprietary",
     "authors": [
@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Orvital\\Auth\\": "src/"
+            "Orvital\\Authority\\": "src/"
         }
     },
     "config": {
@@ -27,9 +27,9 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Orvital\\Auth\\AuthServiceProvider",
-                "Orvital\\Auth\\Passwords\\PasswordResetServiceProvider",
-                "Orvital\\Auth\\Invites\\InviteServiceProvider"
+                "Orvital\\Authority\\AuthorityServiceProvider",
+                "Orvital\\Authority\\Passwords\\PasswordResetServiceProvider",
+                "Orvital\\Authority\\Invites\\InviteServiceProvider"
             ]
         }
     }

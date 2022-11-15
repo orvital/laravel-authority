@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Invites\Http\Controllers;
+namespace Orvital\Authority\Invites\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password as PasswordRule;
-use Orvital\Auth\Invites\Events\InviteAccepted;
-use Orvital\Auth\Invites\Facades\Invite;
+use Orvital\Authority\Invites\Events\InviteAccepted;
+use Orvital\Authority\Invites\Facades\Invite;
 
 class InviteAcceptController extends Controller
 {

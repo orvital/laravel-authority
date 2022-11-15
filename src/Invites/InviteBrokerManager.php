@@ -1,9 +1,9 @@
 <?php
 
-namespace Orvital\Auth\Invites;
+namespace Orvital\Authority\Invites;
 
 use InvalidArgumentException;
-use Orvital\Auth\Invites\Contracts\InviteBrokerFactory as FactoryContract;
+use Orvital\Authority\Invites\Contracts\InviteBrokerFactory as FactoryContract;
 
 class InviteBrokerManager implements FactoryContract
 {
@@ -36,7 +36,7 @@ class InviteBrokerManager implements FactoryContract
      * Attempt to get the broker from the local cache.
      *
      * @param  string|null  $name
-     * @return \Orvital\Auth\Invites\Contracts\InviteBroker
+     * @return \Orvital\Authority\Invites\Contracts\InviteBroker
      */
     public function broker($name = null)
     {
@@ -49,7 +49,7 @@ class InviteBrokerManager implements FactoryContract
      * Resolve the given broker.
      *
      * @param  string  $name
-     * @return \Orvital\Auth\Invites\Contracts\InviteBroker
+     * @return \Orvital\Authority\Invites\Contracts\InviteBroker
      *
      * @throws \InvalidArgumentException
      */
@@ -74,7 +74,7 @@ class InviteBrokerManager implements FactoryContract
      * Create a token repository instance based on the given configuration.
      *
      * @param  array  $config
-     * @return \Orvital\Auth\Invites\Contracts\TokenRepository
+     * @return \Orvital\Authority\Invites\Contracts\TokenRepository
      */
     protected function createTokenRepository(array $config)
     {

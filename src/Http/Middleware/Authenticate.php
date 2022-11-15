@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Http\Middleware;
+namespace Orvital\Authority\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 

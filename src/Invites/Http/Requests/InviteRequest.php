@@ -1,10 +1,10 @@
 <?php
 
-namespace Orvital\Auth\Invites\Http\Requests;
+namespace Orvital\Authority\Invites\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
-use Orvital\Auth\Invites\Facades\Invite;
+use Orvital\Authority\Invites\Facades\Invite;
 
 class InviteRequest extends FormRequest
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Passwords;
+namespace Orvital\Authority\Passwords;
 
 use Closure;
 use Illuminate\Auth\Passwords\TokenRepositoryInterface;

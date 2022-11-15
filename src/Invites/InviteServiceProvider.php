@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Invites;
+namespace Orvital\Authority\Invites;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;

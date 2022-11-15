@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Invites\Contracts;
+namespace Orvital\Authority\Invites\Contracts;
 
 interface InviteBrokerFactory
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Emails\Http\Requests;
+namespace Orvital\Authority\Emails\Http\Requests;
 
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Http\FormRequest;

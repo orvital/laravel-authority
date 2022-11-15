@@ -1,8 +1,8 @@
 <?php
 
-namespace Orvital\Auth\Invites\Traits;
+namespace Orvital\Authority\Invites\Traits;
 
-use Orvital\Auth\Invites\Notifications\InviteUser as InviteUserNotification;
+use Orvital\Authority\Invites\Notifications\InviteUser as InviteUserNotification;
 
 trait CanBeInvited
 {

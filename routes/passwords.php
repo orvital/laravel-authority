@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Orvital\Auth\Passwords\Http\Controllers\PasswordConfirmationController;
-use Orvital\Auth\Passwords\Http\Controllers\PasswordRecoveryController;
-use Orvital\Auth\Passwords\Http\Controllers\PasswordResetController;
+use Orvital\Authority\Passwords\Http\Controllers\PasswordConfirmationController;
+use Orvital\Authority\Passwords\Http\Controllers\PasswordRecoveryController;
+use Orvital\Authority\Passwords\Http\Controllers\PasswordResetController;
 
 Route::middleware('guest')->group(function () {
     Route::controller(PasswordRecoveryController::class)->group(function () {

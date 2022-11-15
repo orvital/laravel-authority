@@ -1,8 +1,8 @@
 <?php
 
-namespace Orvital\Auth\Invites\Contracts;
+namespace Orvital\Authority\Invites\Contracts;
 
-use Orvital\Auth\Invites\Contracts\CanBeInvited as CanBeInvitedContract;
+use Orvital\Authority\Invites\Contracts\CanBeInvited as CanBeInvitedContract;
 
 interface TokenRepository
 {

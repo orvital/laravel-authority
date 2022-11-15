@@ -1,12 +1,12 @@
 <?php
 
-namespace Orvital\Auth\Invites\Facades;
+namespace Orvital\Authority\Invites\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Orvital\Auth\Invites\Contracts\InviteBroker;
+use Orvital\Authority\Invites\Contracts\InviteBroker;
 
 /**
- * @mixin \Orvital\Auth\Invites\InviteBroker
+ * @mixin \Orvital\Authority\Invites\InviteBroker
  */
 class Invite extends Facade
 {

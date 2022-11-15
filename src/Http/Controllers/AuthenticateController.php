@@ -1,11 +1,11 @@
 <?php
 
-namespace Orvital\Auth\Http\Controllers;
+namespace Orvital\Authority\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use Orvital\Auth\Http\Requests\LoginRequest;
+use Orvital\Authority\Http\Requests\LoginRequest;
 
 class AuthenticateController extends Controller
 {

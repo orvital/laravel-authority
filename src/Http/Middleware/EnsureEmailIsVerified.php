@@ -1,6 +1,6 @@
 <?php
 
-namespace Orvital\Auth\Http\Middleware;
+namespace Orvital\Authority\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\MustVerifyEmail;

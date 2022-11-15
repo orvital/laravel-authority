@@ -1,13 +1,13 @@
 <?php
 
-namespace Orvital\Auth\Invites;
+namespace Orvital\Authority\Invites;
 
 use Closure;
 use Illuminate\Contracts\Auth\UserProvider as UserProviderContract;
 use Illuminate\Support\Arr;
-use Orvital\Auth\Invites\Contracts\CanBeInvited as CanBeInvitedContract;
-use Orvital\Auth\Invites\Contracts\InviteBroker as InviteBrokerContract;
-use Orvital\Auth\Invites\Contracts\TokenRepository as TokenRepositoryContract;
+use Orvital\Authority\Invites\Contracts\CanBeInvited as CanBeInvitedContract;
+use Orvital\Authority\Invites\Contracts\InviteBroker as InviteBrokerContract;
+use Orvital\Authority\Invites\Contracts\TokenRepository as TokenRepositoryContract;
 use UnexpectedValueException;
 
 /**

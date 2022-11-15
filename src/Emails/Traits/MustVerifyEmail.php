@@ -1,8 +1,8 @@
 <?php
 
-namespace Orvital\Auth\Emails\Traits;
+namespace Orvital\Authority\Emails\Traits;
 
-use Orvital\Auth\Emails\Notifications\VerifyEmail as VerifyEmailNotification;
+use Orvital\Authority\Emails\Notifications\VerifyEmail as VerifyEmailNotification;
 
 trait MustVerifyEmail
 {

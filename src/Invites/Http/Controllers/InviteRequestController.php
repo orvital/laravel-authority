@@ -1,10 +1,10 @@
 <?php
 
-namespace Orvital\Auth\Invites\Http\Controllers;
+namespace Orvital\Authority\Invites\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Orvital\Auth\Invites\Facades\Invite;
+use Orvital\Authority\Invites\Facades\Invite;
 
 class InviteRequestController extends Controller
 {

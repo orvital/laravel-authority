@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../lang' => $this->app->langPath(),
-            __DIR__.'/../config/authority.php' => $this->app->config_path('authority.php'),
+            __DIR__.'/../config/authority.php' => $this->app->configPath('authority.php'),
         ]);
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');

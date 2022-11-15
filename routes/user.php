@@ -16,5 +16,6 @@ Route::middleware($authMiddleware)->group(function () {
     Route::controller(UserProfileController::class)->group(function () {
         Route::get('profile', 'show')->name('profile.show');
         Route::put('profile', 'update')->name('profile.update');
+        Route::post('profile', 'store')->name('profile.store');
     });
 });

@@ -2,6 +2,7 @@
 
 namespace Orvital\Authority\User\Http\Requests;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,33 +25,17 @@ class UpdateProfileRequest extends FormRequest
     public function updateProfile()
     {
         $user = $this->user();
-        $input = $this->validated();
 
-        if ($input['email'] !== $user->email && $user instanceof MustVerifyEmail) {
-            $this->updateVerifiedUser($user, $input);
-        } else {
+        $user->forceFill($this->validated());
+
+        if ($user->isDirty('email') && $user instanceof MustVerifyEmail) {
             $user->forceFill([
-                'name' => $input['name'],
-                'email' => $input['email'],
-            ])->save();
+                'email_verified_at' => null,
+            ]);
+
+            $user->sendEmailVerificationNotification();
         }
-    }
 
-    /**
-     * Update the given verified user's profile information.
-     *
-     * @param  mixed  $user
-     * @param  array  $input
-     * @return void
-     */
-    protected function updateVerifiedUser($user, array $input)
-    {
-        $user->forceFill([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'email_verified_at' => null,
-        ])->save();
-
-        $user->sendEmailVerificationNotification();
+        $user->save();
     }
 }

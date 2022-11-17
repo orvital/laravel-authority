@@ -25,6 +25,16 @@ class PasswordResetRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'token' => $this->token,
+        ]);
+    }
+
+    /**
      * Reset the user's password.
      */
     public function resetPassword(): string

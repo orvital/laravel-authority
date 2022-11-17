@@ -2,18 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use Orvital\Authority\Password\Http\Controllers\PasswordConfirmationController;
-use Orvital\Authority\Password\Http\Controllers\PasswordRecoveryController;
-use Orvital\Authority\Password\Http\Controllers\PasswordResetController;
+use Orvital\Authority\Password\Http\Controllers\RecoveryController;
 
 Route::middleware('guest')->group(function () {
-    Route::controller(PasswordRecoveryController::class)->group(function () {
-        Route::get('recovery', 'create')->name('password.request');
+    Route::controller(RecoveryController::class)->group(function () {
+        Route::get('recovery', 'index')->name('password.request');
         Route::post('recovery', 'store')->name('password.email');
-    });
-
-    Route::controller(PasswordResetController::class)->group(function () {
-        Route::get('recovery/{token}', 'create')->name('password.reset');
-        Route::post('recovery/{token}', 'store')->name('password.update');
+        Route::get('recovery/{token}', 'show')->name('password.reset');
+        Route::put('recovery/{token}', 'update')->name('password.update');
     });
 });
 

@@ -41,7 +41,7 @@ class AuthorityServiceProvider extends ServiceProvider
 
         Route::group([
             'middleware' => config('authority.middleware'),
-            'prefix' => config('authority.prefix'),
+            // 'prefix' => config('authority.prefix'),
         ], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
             $this->loadRoutesFrom(__DIR__.'/../routes/email.php');

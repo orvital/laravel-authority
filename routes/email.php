@@ -9,7 +9,7 @@ $authMiddleware = config('authority.guard') ? 'auth:'.config('authority.guard') 
 Route::middleware($authMiddleware)->group(function () {
     Route::controller(EmailVerificationController::class)->group(function () {
         Route::get('verification', 'create')->name('verification.notice');
-        Route::post('verification', 'store')->middleware('throttle:6,1');
+        Route::post('verification', 'store')->name('verification.send')->middleware('throttle:6,1');
     });
 
     Route::get('verification/{id}/{hash}', [VerifyEmailController::class, '__invoke'])

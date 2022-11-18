@@ -17,7 +17,7 @@ class VerificationController extends Controller
     {
         return $request->user()->hasVerifiedEmail()
             ? redirect()->intended(config('authority.home'))
-            : view('auth.email-verification');
+            : view('user.verify');
     }
 
     /**

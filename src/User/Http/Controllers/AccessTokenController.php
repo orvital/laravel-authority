@@ -14,7 +14,7 @@ class AccessTokenController extends Controller
      */
     public function index(Request $request)
     {
-        return view('user.tokens', [
+        return view('tokens.index', [
             'user' => $request->user(),
         ]);
     }

@@ -31,6 +31,8 @@ Middlewares: `auth`, `guest`
 
 email
 token
+board
+panel
 
 - /account
 - /profile

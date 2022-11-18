@@ -10,7 +10,7 @@ Middlewares: `auth`, `guest`
 
 - /auth/login                       /auth/access
 - /auth/register                    /auth/signup
-- /auth/recovery                    /auth/rescue
+- /auth/recovery                    /auth/rescue    /forgot  /regain
 
 ## Authenticated
 

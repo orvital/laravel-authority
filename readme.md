@@ -8,12 +8,18 @@ Middlewares: `auth`, `guest`
 
 ## Guest
 
-- /login
-- /register
-- /recovery (password)
+- /auth/login                       /auth/access
+- /auth/register                    /auth/signup
+- /auth/recovery                    /auth/rescue
 
 ## Authenticated
 
-- /logout
-- /verification (email)
-- /confirmation (password)
+- /user/verification (email)        /user/verify
+- /user/confirmation (password)     /user/unlock
+- /user/logout                      /user/logout
+
+- /team
+
+- /account
+- /profile
+- /company

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Orvital\Authority\Password\Http\Requests\PasswordConfirmRequest;
 
-class PasswordConfirmationController extends Controller
+class ConfirmationController extends Controller
 {
     /**
      * Show the confirm password view.

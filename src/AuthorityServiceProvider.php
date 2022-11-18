@@ -15,9 +15,7 @@ class AuthorityServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/authority.php', 'authority'
-        );
+        $this->mergeConfigFrom(__DIR__.'/../config/authority.php', 'authority');
 
         config(['sanctum.routes' => false]);
 
@@ -37,7 +35,6 @@ class AuthorityServiceProvider extends ServiceProvider
 
         Route::group([
             'middleware' => config('authority.middleware'),
-            // 'prefix' => config('authority.prefix'),
         ], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
             $this->loadRoutesFrom(__DIR__.'/../routes/user.php');

@@ -27,6 +27,6 @@ Route::middleware($guestMiddleware)->prefix('auth')->group(function () {
     });
 });
 
-Route::middleware($authMiddleware)->group(function () {
+Route::middleware($authMiddleware)->prefix('auth')->group(function () {
     Route::post('logout', [AuthenticateController::class, 'destroy'])->name('logout');
 });

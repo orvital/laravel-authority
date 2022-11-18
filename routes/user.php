@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Orvital\Authority\Email\Http\Controllers\VerificationController;
 use Orvital\Authority\Password\Http\Controllers\ConfirmationController;
 use Orvital\Authority\User\Http\Controllers\AccessTokenController;
-use Orvital\Authority\User\Http\Controllers\UserProfileController;
+use Orvital\Authority\User\Http\Controllers\AccountController;
 
 $authMiddleware = config('authority.guard') ? 'auth:'.config('authority.guard') : 'auth';
 
@@ -22,10 +22,10 @@ Route::middleware($authMiddleware)->prefix('user')->group(function () {
 });
 
 Route::middleware($authMiddleware)->prefix('account')->group(function () {
-    Route::controller(UserProfileController::class)->group(function () {
-        Route::get('', 'show')->name('profile.show');
-        Route::put('', 'update')->name('profile.update');
-        Route::post('', 'store')->name('profile.store');
+    Route::controller(AccountController::class)->group(function () {
+        Route::get('', 'show')->name('account.show');
+        Route::put('', 'update')->name('account.update');
+        Route::post('', 'store')->name('account.store');
     });
 
     Route::controller(AccessTokenController::class)->group(function () {

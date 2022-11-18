@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use Orvital\Authority\User\Http\Requests\UpdatePasswordRequest;
 use Orvital\Authority\User\Http\Requests\UpdateProfileRequest;
 
-class UserProfileController extends Controller
+class AccountController extends Controller
 {
     /**
      * Show the user profile screen.
@@ -16,7 +16,7 @@ class UserProfileController extends Controller
      */
     public function show(Request $request)
     {
-        return view('profile.show', [
+        return view('account.show', [
             'request' => $request,
             'user' => $request->user(),
         ]);

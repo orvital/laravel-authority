@@ -34,7 +34,7 @@ class PasswordConfirmRequest extends FormRequest
     public function withValidator(Validator $validator): void
     {
         $validator->after(function (Validator $validator) {
-            if (! auth()->validate($this->validated())) {
+            if (! auth()->guard()->validate($this->validated())) {
                 $validator->errors()->add('password', trans('auth.password'));
             }
         });

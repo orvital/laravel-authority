@@ -44,9 +44,7 @@ class AuthorityServiceProvider extends ServiceProvider
             // 'prefix' => config('authority.prefix'),
         ], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
-            $this->loadRoutesFrom(__DIR__.'/../routes/email.php');
             $this->loadRoutesFrom(__DIR__.'/../routes/invite.php');
-            $this->loadRoutesFrom(__DIR__.'/../routes/password.php');
             $this->loadRoutesFrom(__DIR__.'/../routes/user.php');
         });
 

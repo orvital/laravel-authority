@@ -29,6 +29,8 @@ Middlewares: `auth`, `guest`
 - /user/settings
 - /user/password
 
+email
+token
 
 - /account
 - /profile

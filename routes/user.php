@@ -10,14 +10,14 @@ $authMiddleware = config('authority.guard') ? 'auth:'.config('authority.guard') 
 
 Route::middleware($authMiddleware)->prefix('user')->group(function () {
     Route::controller(VerificationController::class)->group(function () {
-        Route::get('verification', 'index')->name('verification.notice');
-        Route::post('verification', 'store')->name('verification.send')->middleware('throttle:6,1');
-        Route::get('verification/{id}/{hash}', 'show')->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
+        Route::get('verify', 'index')->name('verification.notice');
+        Route::post('verify', 'store')->name('verification.send')->middleware('throttle:6,1');
+        Route::get('verify/{id}/{hash}', 'show')->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
     });
 
     Route::controller(ConfirmationController::class)->group(function () {
-        Route::get('confirmation', 'show')->name('password.confirm');
-        Route::post('confirmation', 'store')->middleware('throttle:6,1');
+        Route::get('unlock', 'show')->name('password.confirm');
+        Route::post('unlock', 'store')->middleware('throttle:6,1');
     });
 
     Route::controller(UserProfileController::class)->group(function () {

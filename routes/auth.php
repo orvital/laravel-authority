@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use Orvital\Authority\Auth\Http\Controllers\AuthenticateController;
 use Orvital\Authority\Auth\Http\Controllers\RegisterController;
 
-Route::middleware('guest')->group(function () {
+$authMiddleware = config('authority.guard') ? 'auth:'.config('authority.guard') : 'auth';
+$guestMiddleware = config('authority.guard') ? 'guest:'.config('authority.guard') : 'guest';
+
+Route::middleware($guestMiddleware)->group(function () {
     Route::controller(RegisterController::class)->group(function () {
         Route::get('register', 'create')->name('register');
         Route::post('register', 'store');
@@ -15,8 +18,6 @@ Route::middleware('guest')->group(function () {
         Route::post('login', 'store');
     });
 });
-
-$authMiddleware = config('authority.guard') ? 'auth:'.config('authority.guard') : 'auth';
 
 Route::middleware($authMiddleware)->group(function () {
     Route::post('logout', [AuthenticateController::class, 'destroy'])->name('logout');

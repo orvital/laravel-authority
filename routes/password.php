@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use Orvital\Authority\Password\Http\Controllers\PasswordConfirmationController;
 use Orvital\Authority\Password\Http\Controllers\RecoveryController;
 
-Route::middleware('guest')->group(function () {
+$authMiddleware = config('authority.guard') ? 'auth:'.config('authority.guard') : 'auth';
+$guestMiddleware = config('authority.guard') ? 'guest:'.config('authority.guard') : 'guest';
+
+Route::middleware($guestMiddleware)->group(function () {
     Route::controller(RecoveryController::class)->group(function () {
         Route::get('recovery', 'index')->name('password.request');
         Route::post('recovery', 'store')->name('password.email');
@@ -12,8 +15,6 @@ Route::middleware('guest')->group(function () {
         Route::put('recovery/{token}', 'update')->name('password.update');
     });
 });
-
-$authMiddleware = config('authority.guard') ? 'auth:'.config('authority.guard') : 'auth';
 
 Route::middleware($authMiddleware)->group(function () {
     Route::controller(PasswordConfirmationController::class)->group(function () {

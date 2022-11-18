@@ -2,7 +2,6 @@
 
 namespace Orvital\Authority;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
@@ -20,7 +19,7 @@ class AuthorityServiceProvider extends ServiceProvider
             __DIR__.'/../config/authority.php', 'authority'
         );
 
-        $this->setConfigurationValues();
+        config(['sanctum.routes' => false]);
 
         Sanctum::ignoreMigrations();
     }
@@ -31,28 +30,20 @@ class AuthorityServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../lang' => $this->app->langPath(),
             __DIR__.'/../config/authority.php' => $this->app->configPath('authority.php'),
         ]);
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
-        $this->loadTranslationsFrom(__DIR__.'/../lang', 'auth');
 
         Route::group([
             'middleware' => config('authority.middleware'),
             // 'prefix' => config('authority.prefix'),
         ], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
-            $this->loadRoutesFrom(__DIR__.'/../routes/invite.php');
             $this->loadRoutesFrom(__DIR__.'/../routes/user.php');
         });
 
         Sanctum::usePersonalAccessTokenModel(AccessToken::class);
-
-        Auth::provider('instance', function ($app, array $config) {
-            return new InstanceUserProvider($config['model']);
-        });
 
         /**
          * Define default password rules
@@ -64,31 +55,5 @@ class AuthorityServiceProvider extends ServiceProvider
                 ? $rule->mixedCase()->uncompromised()
                 : $rule;
         });
-    }
-
-    /**
-     * Set configuration values at runtime.
-     */
-    protected function setConfigurationValues(): void
-    {
-        config(['auth.defaults.invites' => 'users']);
-
-        config([
-            'auth.providers.guests' => [
-                'driver' => 'instance',
-                'model' => config('auth.providers.users.model'),
-            ],
-        ]);
-
-        config([
-            'auth.invites.users' => array_merge([
-                'provider' => 'guests',
-                'table' => 'invite_tokens',
-                'expire' => 60,
-                'throttle' => 60,
-            ], config('auth.invites.users', [])),
-        ]);
-
-        config(['sanctum.routes' => false]);
     }
 }

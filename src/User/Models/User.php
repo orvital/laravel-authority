@@ -12,16 +12,13 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Orvital\Authority\Email\Traits\MustVerifyEmail;
-use Orvital\Authority\Invite\Contracts\CanBeInvited as CanBeInvitedContract;
-use Orvital\Authority\Invite\Traits\CanBeInvited;
 use Orvital\Authority\Password\Traits\CanResetPassword;
 
-abstract class User extends Model implements AuthenticatableContract, AuthorizableContract, MustVerifyEmailContract, CanResetPasswordContract, CanBeInvitedContract
+abstract class User extends Model implements AuthenticatableContract, AuthorizableContract, MustVerifyEmailContract, CanResetPasswordContract
 {
     use Notifiable;
     use Authorizable;
     use HasApiTokens;
-    use CanBeInvited;
     use Authenticatable;
     use MustVerifyEmail;
     use CanResetPassword;

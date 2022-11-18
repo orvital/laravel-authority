@@ -11,7 +11,6 @@ Middlewares: `auth`, `guest`
 - /login
 - /register
 - /recovery (password)
-- /invite
 
 ## Authenticated
 

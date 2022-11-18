@@ -28,8 +28,7 @@
         "laravel": {
             "providers": [
                 "Orvital\\Authority\\AuthorityServiceProvider",
-                "Orvital\\Authority\\Password\\PasswordResetServiceProvider",
-                "Orvital\\Authority\\Invite\\InviteServiceProvider"
+                "Orvital\\Authority\\Password\\PasswordResetServiceProvider"
             ]
         }
     }

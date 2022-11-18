@@ -19,25 +19,13 @@ Route::middleware($authMiddleware)->prefix('user')->group(function () {
         Route::get('unlock', 'show')->name('password.confirm');
         Route::post('unlock', 'store')->middleware('throttle:6,1');
     });
-
-    // Route::controller(UserProfileController::class)->group(function () {
-    //     Route::get('profile', 'show')->name('profile.show');
-    //     Route::put('profile', 'update')->name('profile.update');
-    //     Route::post('profile', 'store')->name('profile.store');
-    // });
-
-    // Route::controller(AccessTokenController::class)->group(function () {
-    //     Route::get('tokens', 'index')->name('token.index');
-    //     Route::post('tokens', 'store')->name('token.store');
-    //     Route::delete('tokens/{token}', 'destroy')->name('token.destroy');
-    // });
 });
 
 Route::middleware($authMiddleware)->prefix('account')->group(function () {
     Route::controller(UserProfileController::class)->group(function () {
-        Route::get('profile', 'show')->name('profile.show');
-        Route::put('profile', 'update')->name('profile.update');
-        Route::post('profile', 'store')->name('profile.store');
+        Route::get('', 'show')->name('profile.show');
+        Route::put('', 'update')->name('profile.update');
+        Route::post('', 'store')->name('profile.store');
     });
 
     Route::controller(AccessTokenController::class)->group(function () {

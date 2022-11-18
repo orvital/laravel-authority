@@ -4,7 +4,6 @@ namespace Orvital\Authority\Auth\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 use Orvital\Authority\Auth\Http\Requests\LoginRequest;
 
 class AuthenticateController extends Controller
@@ -40,7 +39,7 @@ class AuthenticateController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
+        auth()->guard()->logout();
 
         $request->session()->invalidate();
 

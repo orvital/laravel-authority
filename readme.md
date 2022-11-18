@@ -1,5 +1,11 @@
 # Laravel Authority
 
+## Authentication
+
+Guards: `session`, `sanctum`
+Middleware Groups: `web`, `api`
+Middlewares: `auth`, `guest`
+
 ## Guest
 
 - /login

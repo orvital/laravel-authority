@@ -3,7 +3,6 @@
 namespace Orvital\Authority\Password\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Validator;
 
 class PasswordConfirmRequest extends FormRequest
@@ -35,7 +34,7 @@ class PasswordConfirmRequest extends FormRequest
     public function withValidator(Validator $validator): void
     {
         $validator->after(function (Validator $validator) {
-            if (! Auth::validate($this->validated())) {
+            if (! auth()->validate($this->validated())) {
                 $validator->errors()->add('password', trans('auth.password'));
             }
         });

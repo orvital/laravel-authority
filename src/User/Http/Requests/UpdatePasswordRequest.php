@@ -14,7 +14,7 @@ class UpdatePasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'current_password' => ['required', 'string', 'current_password:'.config('authority.guard')],
+            'current_password' => ['required', 'string', 'current_password:'.config('authority.web.guard')],
             'password' => ['required', 'confirmed', PasswordRule::default()],
         ];
     }

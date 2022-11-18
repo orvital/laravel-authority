@@ -15,24 +15,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Authentication Guard
+    | Route Groups Attributes
     |--------------------------------------------------------------------------
     |
+    | The middleware assigned to the routes.
     | The authentication guard that should be used while authenticating users.
     |
     */
 
-    'guard' => 'session',
+    'web' => [
+        'middleware' => ['web', 'splade'],
+        'guard' => 'session',
+    ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Routes Middleware
-    |--------------------------------------------------------------------------
-    |
-    | The middleware assigned to the routes.
-    |
-    */
-
-    'middleware' => ['web', 'splade'],
+    'api' => [
+        'middleware' => ['api'],
+        'prefix' => 'api',
+        'guard' => 'sanctum',
+    ],
 
 ];

@@ -14,10 +14,10 @@ Route::middleware($guestMiddleware)->prefix('auth')->group(function () {
         Route::post('signup', 'store');
     });
 
-    // Route::controller(AuthenticateController::class)->group(function () {
-    //     Route::get('access', 'create')->name('login');
-    //     Route::post('access', 'store');
-    // });
+    Route::controller(AuthenticateController::class)->group(function () {
+        Route::get('access', 'create')->name('login');
+        Route::post('access', 'store');
+    });
 
     Route::controller(RecoveryController::class)->group(function () {
         Route::get('forgot', 'index')->name('password.request');
@@ -27,12 +27,12 @@ Route::middleware($guestMiddleware)->prefix('auth')->group(function () {
     });
 });
 
-// Route::middleware($authMiddleware)->prefix('auth')->group(function () {
-//     Route::delete('access', [AuthenticateController::class, 'destroy'])->name('logout');
-// });
-
-Route::controller(AuthenticateController::class)->prefix('auth')->group(function () {
-    Route::get('access', 'create')->middleware($guestMiddleware)->name('login');
-    Route::post('access', 'store')->middleware($guestMiddleware);
-    Route::delete('access', 'destroy')->middleware($authMiddleware)->name('logout');
+Route::middleware($authMiddleware)->prefix('auth')->group(function () {
+    Route::delete('access', [AuthenticateController::class, 'destroy'])->name('logout');
 });
+
+// Route::controller(AuthenticateController::class)->prefix('auth')->group(function () {
+//     Route::get('access', 'create')->middleware($guestMiddleware)->name('login');
+//     Route::post('access', 'store')->middleware($guestMiddleware);
+//     Route::delete('access', 'destroy')->middleware($authMiddleware)->name('logout');
+// });

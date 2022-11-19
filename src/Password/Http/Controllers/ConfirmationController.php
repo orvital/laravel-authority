@@ -15,7 +15,7 @@ class ConfirmationController extends Controller
      */
     public function show(Request $request)
     {
-        return view('user.unlock');
+        return view('auth.unlock');
     }
 
     /**

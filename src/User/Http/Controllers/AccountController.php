@@ -16,7 +16,7 @@ class AccountController extends Controller
      */
     public function show(Request $request)
     {
-        return view('account.show', [
+        return view('user.show', [
             'request' => $request,
             'user' => $request->user(),
         ]);

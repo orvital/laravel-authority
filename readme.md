@@ -19,9 +19,10 @@ Middlewares: `auth`, `guest`
 - /user/confirmation (password)     /user/unlock
 
 - /auth
+- /open
 - /user
+- /site
 - /team
-
 
 - /user/profile                 panel
 - /user/tokens                  token
@@ -29,16 +30,19 @@ Middlewares: `auth`, `guest`
 - /user/settings
 - /user/password
 
-email
-token
-board
-panel
+- secure
+- public
+
+- email
+- token
+- board
+- panel
 
 - /account
 - /profile
 - /company
 
-
+GET|HEAD    auth/cookie
 
 GET|HEAD    auth/access ...........  auth/access ................  auth ...........
 POST        auth/access ...........  auth/access ................  auth ...........
@@ -62,3 +66,8 @@ POST        account ...............  user .......................  user ........
 GET|HEAD    account/tokens ........  user/tokens ................  user/tokens ........
 POST        account/tokens ........  user/tokens ................  user/tokens ........
 DELETE      account/tokens/{token}   user/tokens/{token}.........  user/tokens/{token} 
+
+
+/api/user
+/api/auth
+/api/auth/token

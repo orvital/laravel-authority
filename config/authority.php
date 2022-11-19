@@ -25,6 +25,7 @@ return [
 
     'web' => [
         'middleware' => ['web', 'splade'],
+        'prefix' => 'auth',
         'guard' => 'session',
     ],
 

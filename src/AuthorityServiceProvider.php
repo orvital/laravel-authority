@@ -40,8 +40,15 @@ class AuthorityServiceProvider extends ServiceProvider
             });
 
         Route::middleware(config('authority.web.middleware'))
+            ->prefix(config('authority.web.prefix'))
             ->group(function () {
                 $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+            });
+
+        Route::middleware(config('authority.web.middleware'))
+            ->prefix('user')
+            ->group(function () {
+                $this->loadRoutesFrom(__DIR__.'/../routes/user.php');
             });
 
         Sanctum::usePersonalAccessTokenModel(AccessToken::class);

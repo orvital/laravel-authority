@@ -26,7 +26,7 @@ class RequirePassword extends Middleware
             }
 
             return $this->responseFactory->redirectGuest(
-                $this->urlGenerator->route($redirectToRoute ?? 'password.confirm')
+                $this->urlGenerator->route($redirectToRoute ?? 'confirmation')
             );
         }
 

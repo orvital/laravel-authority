@@ -30,6 +30,6 @@ Route::middleware($middleware['auth'])->group(function () {
     Route::controller(AccessTokenController::class)->group(function () {
         Route::get('tokens', 'index')->name('user.tokens.index');
         Route::post('tokens', 'store')->name('user.tokens.store');
-        Route::delete('tokens/{token}', 'destroy')->name('user.tokens.destroy');
+        Route::delete('tokens/{id}', 'destroy')->name('user.tokens.destroy');
     });
 });

@@ -2,6 +2,7 @@
 
 namespace Orvital\Authority\Http\Middleware;
 
+use Closure;
 use Illuminate\Auth\Middleware\RequirePassword as Middleware;
 
 class RequirePassword extends Middleware

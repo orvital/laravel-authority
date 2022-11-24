@@ -158,3 +158,10 @@ DELETE      account/tokens/{token}   user/tokens/{token}.........  user/tokens/{
 /api/user
 /api/auth
 /api/auth/token
+
+POST   /account                 Create Account
+PATCH  /account/password        Update Password
+PATCH  /account/email           Update Email
+
+POST   /account/recovery        Create Password Recovery
+POST   /account/verification    Create Email Verification

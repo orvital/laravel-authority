@@ -4,7 +4,6 @@ namespace Orvital\Authority\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\Rules\Password as PasswordRule;
 
 class PasswordUpdateRequest extends FormRequest

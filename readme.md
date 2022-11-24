@@ -40,6 +40,13 @@ DELETE     user/tokens/{token}
 - /auth/register                    /auth/signup            /auth/signup
 - /auth/recovery                    /auth/rescue            /auth/rescue    (forgot, regain)
 
+forgot
+rescue
+reissue
+recover
+restore
+recovery
+
 ## Authenticated
 
 - /user/profile                     /user
@@ -165,3 +172,9 @@ PATCH  /account/email           Update Email
 
 POST   /account/recovery        Create Password Recovery
 POST   /account/verification    Create Email Verification
+
+
+| GET|HEAD | auth/forgot              | `password.request`    
+| POST     | auth/forgot              | `password.email`        
+| GET|HEAD | auth/forgot/{token}      | password.reset        
+| PUT      | auth/forgot/{token}      | password.update       

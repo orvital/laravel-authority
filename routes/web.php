@@ -57,10 +57,10 @@ Route::middleware($middleware['guest'])->group(function () {
     });
 
     Route::controller(RecoveryController::class)->group(function () {
-        Route::get('forgot', 'index')->name('password.request');
-        Route::post('forgot', 'store')->name('password.email');
-        Route::get('forgot/{token}', 'show')->name('password.reset');
-        Route::put('forgot/{token}', 'update')->name('password.update');
+        Route::get('recovery', 'index')->name('recovery');
+        Route::post('recovery', 'store');
+        Route::get('recovery/{token}', 'show')->name('recovery.reset');
+        Route::put('recovery/{token}', 'update');
     });
 });
 

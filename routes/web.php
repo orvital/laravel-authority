@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Orvital\Authority\Http\Controllers\AccessTokenController;
+use Orvital\Authority\Http\Controllers\AccountController;
 use Orvital\Authority\Http\Controllers\AuthenticateController;
 use Orvital\Authority\Http\Controllers\ConfirmationController;
 use Orvital\Authority\Http\Controllers\CsrfCookieController;
@@ -75,5 +77,22 @@ Route::middleware($middleware['auth'])->group(function () {
     Route::controller(ConfirmationController::class)->group(function () {
         Route::get('unlock', 'show')->name('password.confirm');
         Route::post('unlock', 'store')->middleware('throttle:6,1');
+    });
+});
+
+/**
+ * Authenticated: /account
+ */
+Route::middleware($middleware['auth'])->prefix('user')->group(function () {
+    Route::controller(AccountController::class)->group(function () {
+        Route::get('', 'show')->name('account.show');
+        Route::put('', 'update')->name('account.update');
+        Route::post('', 'store')->name('account.store');
+    });
+
+    Route::controller(AccessTokenController::class)->group(function () {
+        Route::get('tokens', 'index')->name('token.index');
+        Route::post('tokens', 'store')->name('token.store');
+        Route::delete('tokens/{token}', 'destroy')->name('token.destroy');
     });
 });

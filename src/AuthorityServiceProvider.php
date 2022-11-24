@@ -5,8 +5,6 @@ namespace Orvital\Authority;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
-use Laravel\Sanctum\Sanctum;
-use Orvital\Authority\Models\AccessToken;
 
 class AuthorityServiceProvider extends ServiceProvider
 {
@@ -16,10 +14,6 @@ class AuthorityServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/authority.php', 'authority');
-
-        config(['sanctum.routes' => false]);
-
-        Sanctum::ignoreMigrations();
     }
 
     /**
@@ -33,19 +27,11 @@ class AuthorityServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        Route::middleware(config('authority.api.middleware'))
-            ->prefix(config('authority.api.prefix'))
-            ->group(function () {
-                $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
-            });
-
         Route::middleware(config('authority.web.middleware'))
             ->prefix(config('authority.web.prefix'))
             ->group(function () {
                 $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
             });
-
-        Sanctum::usePersonalAccessTokenModel(AccessToken::class);
 
         /**
          * Define default password rules

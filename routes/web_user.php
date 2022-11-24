@@ -28,7 +28,7 @@ Route::middleware($middleware['auth'])->group(function () {
     Route::put('password', [PasswordController::class, 'update'])->name('user.password');
 
     Route::controller(AccessTokenController::class)->group(function () {
-        Route::get('tokens', 'index')->name('user.tokens.index');
+        Route::get('tokens', 'index')->name('user.tokens');
         Route::post('tokens', 'store')->name('user.tokens.store');
         Route::delete('tokens/{id}', 'destroy')->name('user.tokens.destroy');
     });

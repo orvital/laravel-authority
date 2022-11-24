@@ -59,19 +59,3 @@ Route::middleware($middleware['auth'])->group(function () {
         Route::post('unlock', 'store')->middleware('throttle:6,1');
     });
 });
-
-/**
- * Authenticated: /account
- */
-Route::middleware($middleware['auth'])->prefix('user')->group(function () {
-    Route::get('', [UserController::class, 'show'])->name('user');
-
-    Route::put('profile', [ProfileController::class, 'update'])->name('user.profile');
-    Route::put('password', [PasswordController::class, 'update'])->name('user.password');
-
-    Route::controller(AccessTokenController::class)->group(function () {
-        Route::get('tokens', 'index')->name('user.tokens.index');
-        Route::post('tokens', 'store')->name('user.tokens.store');
-        Route::delete('tokens/{token}', 'destroy')->name('user.tokens.destroy');
-    });
-});

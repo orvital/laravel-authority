@@ -38,6 +38,12 @@ class AuthorityServiceProvider extends ServiceProvider
             ->group(function () {
                 $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
             });
+        
+        Route::middleware(config('authority.web.middleware'))
+            ->prefix('user')
+            ->group(function () {
+                $this->loadRoutesFrom(__DIR__.'/../routes/web_user.php');
+            });
 
         /**
          * Define default password rules

@@ -7,6 +7,41 @@ Middleware Groups: `web`, `api`
 Middlewares: `auth`, `guest`
 
 ## Routes
+
+**guest**
+
+GET|HEAD  auth/access                   
+POST      auth/access                   
+GET|HEAD  auth/cookie                   
+GET|HEAD  auth/recovery                 
+POST      auth/recovery                 
+GET|HEAD  auth/recovery/{token}         
+PUT       auth/recovery/{token}         
+GET|HEAD  auth/signup                   
+POST      auth/signup                   
+
+**authenticated**
+
+POST      auth/logout                   user/logout                   
+GET|HEAD  auth/unlock                   user/unlock                   
+POST      auth/unlock                   user/unlock                   
+GET|HEAD  auth/verify                   user/verify                   
+POST      auth/verify                   user/verify                   
+GET|HEAD  auth/verify/{id}/{hash}       user/verify/{id}/{hash}       
+
+GET|HEAD  auth/user                     
+PUT       auth/user/password            user/password            
+PUT       auth/user/profile             user/profile             
+GET|HEAD  user/tokens                   
+POST      user/tokens                   
+DELETE    user/tokens/{token}           
+
+
+
+
+
+
+
 GET|HEAD   auth/cookie            
 
 <!-- guest:session -->

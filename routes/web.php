@@ -11,6 +11,7 @@ use Orvital\Authority\Http\Controllers\RecoveryController;
 use Orvital\Authority\Http\Controllers\RegisterController;
 use Orvital\Authority\Http\Controllers\UserController;
 use Orvital\Authority\Http\Controllers\VerificationController;
+use Orvital\Authority\Http\Controllers\TokenController;
 
 $middleware = [
     'auth' => implode(':', array_filter(['auth', config('authority.web.guard')])),
@@ -27,6 +28,7 @@ Route::middleware($middleware['guest'])->group(function () {
     });
 
     Route::get('cookie', [CsrfCookieController::class, 'show'])->name('csrf');
+    Route::post('token', [TokenController::class, 'store']);
 
     Route::controller(LoginController::class)->group(function () {
         Route::get('access', 'create')->name('login');
@@ -50,7 +52,6 @@ Route::middleware($middleware['auth'])->group(function () {
     Route::controller(VerificationController::class)->group(function () {
         Route::get('verify', 'index')->name('verification');
         Route::post('verify', 'store')->middleware('throttle:6,1');
-
         Route::get('verify/{id}/{hash}', 'show')->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
     });
 

@@ -14,6 +14,6 @@ Route::post('token', [TokenController::class, 'store']);
 Route::middleware($middleware['auth'])->group(function () {
     Route::controller(ApiTokenController::class)->group(function () {
         Route::get('token', 'show');
-        Route::delete('token/{id}', 'destroy');
+        Route::delete('token', 'destroy');
     });
 });

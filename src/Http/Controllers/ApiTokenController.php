@@ -13,16 +13,16 @@ class ApiTokenController extends Controller
         return $request->user()->currentAccessToken();
     }
 
-    public function destroy(Request $request, string $id)
+    public function destroy(Request $request)
     {
         // Revoke all tokens...
         // $request->user()->tokens()->delete();
 
         // Revoke current token
-        // $request->user()->currentAccessToken()->delete();
+        $request->user()->currentAccessToken()->delete();
 
         // Revoke a specific token...
-        $request->user()->tokens()->where('id', $id)->delete();
+        // $request->user()->tokens()->where('id', $id)->delete();
 
         return response()->noContent();
     }

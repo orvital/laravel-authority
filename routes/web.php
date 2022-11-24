@@ -5,29 +5,27 @@ use Orvital\Authority\Http\Controllers\ConfirmationController;
 use Orvital\Authority\Http\Controllers\CsrfCookieController;
 use Orvital\Authority\Http\Controllers\LoginController;
 use Orvital\Authority\Http\Controllers\LogoutController;
-use Orvital\Authority\Http\Controllers\PasswordController;
-use Orvital\Authority\Http\Controllers\ProfileController;
 use Orvital\Authority\Http\Controllers\RecoveryController;
 use Orvital\Authority\Http\Controllers\RegisterController;
-use Orvital\Authority\Http\Controllers\UserController;
 use Orvital\Authority\Http\Controllers\VerificationController;
-use Orvital\Authority\Http\Controllers\AccessTokenController;
+use Orvital\Authority\Http\Controllers\PasswordController;
+use Orvital\Authority\Http\Controllers\ProfileController;
 
 $middleware = [
     'auth' => implode(':', array_filter(['auth', config('authority.web.guard')])),
     'guest' => implode(':', array_filter(['guest', config('authority.web.guard')])),
 ];
 
+Route::get('cookie', [CsrfCookieController::class, 'show'])->name('csrf');
+
 /**
  * Guests
  */
-Route::middleware($middleware['guest'])->group(function () {
+Route::middleware($middleware['guest'])->prefix('auth')->group(function () {
     Route::controller(RegisterController::class)->group(function () {
         Route::get('signup', 'create')->name('register');
         Route::post('signup', 'store');
     });
-
-    Route::get('cookie', [CsrfCookieController::class, 'show'])->name('csrf');
 
     Route::controller(LoginController::class)->group(function () {
         Route::get('access', 'create')->name('login');
@@ -45,7 +43,7 @@ Route::middleware($middleware['guest'])->group(function () {
 /**
  * Authenticated
  */
-Route::middleware($middleware['auth'])->group(function () {
+Route::middleware($middleware['auth'])->prefix('user')->group(function () {
     Route::post('logout', [LogoutController::class, 'store'])->name('logout');
 
     Route::controller(VerificationController::class)->group(function () {
@@ -58,4 +56,7 @@ Route::middleware($middleware['auth'])->group(function () {
         Route::get('unlock', 'show')->name('confirmation');
         Route::post('unlock', 'store')->middleware('throttle:6,1');
     });
+
+    Route::put('profile', [ProfileController::class, 'update'])->name('user.profile');
+    Route::put('password', [PasswordController::class, 'update'])->name('user.password');
 });

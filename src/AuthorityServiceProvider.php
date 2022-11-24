@@ -34,13 +34,13 @@ class AuthorityServiceProvider extends ServiceProvider
             });
 
         Route::middleware(config('authority.web.middleware'))
-            ->prefix(config('authority.web.prefix'))
+            // ->prefix(config('authority.web.prefix'))
             ->group(function () {
                 $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
             });
         
         Route::middleware(config('authority.web.middleware'))
-            ->prefix('user')
+            // ->prefix('user')
             ->group(function () {
                 $this->loadRoutesFrom(__DIR__.'/../routes/web_user.php');
             });

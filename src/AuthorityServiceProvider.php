@@ -27,6 +27,12 @@ class AuthorityServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
+        Route::middleware(config('authority.api.middleware'))
+            ->prefix(config('authority.api.prefix'))
+            ->group(function () {
+                $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+            });
+
         Route::middleware(config('authority.web.middleware'))
             ->prefix(config('authority.web.prefix'))
             ->group(function () {

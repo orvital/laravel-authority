@@ -29,4 +29,10 @@ return [
         'guard' => 'session',
     ],
 
+    'api' => [
+        'middleware' => ['api'],
+        'prefix' => 'api',
+        'guard' => 'sanctum',
+    ],
+
 ];

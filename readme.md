@@ -38,6 +38,33 @@ DELETE    user/tokens/{token}
 
 
 
+| POST     | api/token               |                     | api                                             |
+| GET|HEAD | api/token               |                     | api, auth:sanctum                               |
+| DELETE   | api/token               |                     | api, auth:sanctum                               |
+| GET|HEAD | auth/cookie             | csrf                | web, splade                                     |
+| GET|HEAD | auth/access             | login               | web, splade, guest:session                      |
+| POST     | auth/access             |                     | web, splade, guest:session                      |
+| GET|HEAD | auth/recovery           | recovery            | web, splade, guest:session                      |
+| POST     | auth/recovery           |                     | web, splade, guest:session                      |
+| GET|HEAD | auth/recovery/{token}   | recovery.reset      | web, splade, guest:session                      |
+| PUT      | auth/recovery/{token}   |                     | web, splade, guest:session                      |
+| GET|HEAD | auth/signup             | register            | web, splade, guest:session                      |
+| POST     | auth/signup             |                     | web, splade, guest:session                      |
+
+| GET|HEAD | user                    | user                | web, splade, auth:sanctum                       |
+| GET|HEAD | user/tokens             | user.tokens         | web, splade, auth:sanctum                       |
+| POST     | user/tokens             | user.tokens.store   | web, splade, auth:sanctum                       |
+| DELETE   | user/tokens/{id}        | user.tokens.destroy | web, splade, auth:sanctum                       |
+
+| PUT      | user/password           | user.password       | web, splade, auth:session                       |
+| PUT      | user/profile            | user.profile        | web, splade, auth:session                       |
+
+| POST     | user/logout             | logout              | web, splade, auth:session                       |
+| GET|HEAD | user/unlock             | confirmation        | web, splade, auth:session                       |
+| POST     | user/unlock             |                     | web, splade, auth:session, throttle:6,1         |
+| GET|HEAD | user/verify             | verification        | web, splade, auth:session                       |
+| POST     | user/verify             |                     | web, splade, auth:session, throttle:6,1         |
+| GET|HEAD | user/verify/{id}/{hash} | verification.verify | web, splade, auth:session, signed, throttle:6,1 |
 
 
 

@@ -8,12 +8,10 @@ use Orvital\Authority\Http\Controllers\LogoutController;
 use Orvital\Authority\Http\Controllers\RecoveryController;
 use Orvital\Authority\Http\Controllers\RegisterController;
 use Orvital\Authority\Http\Controllers\VerificationController;
-use Orvital\Authority\Http\Controllers\PasswordController;
-use Orvital\Authority\Http\Controllers\ProfileController;
 
 $middleware = [
-    'auth' => implode(':', array_filter(['auth', config('authority.web.guard')])),
-    'guest' => implode(':', array_filter(['guest', config('authority.web.guard')])),
+    'auth' => implode(':', array_filter(['auth', config('authority.auth.guard')])),
+    'guest' => implode(':', array_filter(['guest', config('authority.auth.guard')])),
 ];
 
 Route::get('cookie', [CsrfCookieController::class, 'show'])->name('csrf');
@@ -21,7 +19,7 @@ Route::get('cookie', [CsrfCookieController::class, 'show'])->name('csrf');
 /**
  * Guests
  */
-Route::middleware($middleware['guest'])->prefix('auth')->group(function () {
+Route::middleware($middleware['guest'])->group(function () {
     Route::controller(RegisterController::class)->group(function () {
         Route::get('signup', 'create')->name('register');
         Route::post('signup', 'store');
@@ -43,7 +41,7 @@ Route::middleware($middleware['guest'])->prefix('auth')->group(function () {
 /**
  * Authenticated
  */
-Route::middleware($middleware['auth'])->prefix('user')->group(function () {
+Route::middleware($middleware['auth'])->group(function () {
     Route::post('logout', [LogoutController::class, 'store'])->name('logout');
 
     Route::controller(VerificationController::class)->group(function () {
@@ -57,6 +55,4 @@ Route::middleware($middleware['auth'])->prefix('user')->group(function () {
         Route::post('unlock', 'store')->middleware('throttle:6,1');
     });
 
-    Route::put('profile', [ProfileController::class, 'update'])->name('user.profile');
-    Route::put('password', [PasswordController::class, 'update'])->name('user.password');
 });

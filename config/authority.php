@@ -23,16 +23,22 @@ return [
     |
     */
 
-    'web' => [
+    'api' => [
+        'middleware' => ['api'],
+        'prefix' => 'api',
+        'guard' => 'sanctum',
+    ],
+
+    'auth' => [
         'middleware' => ['web', 'splade'],
         'prefix' => 'auth',
         'guard' => 'session',
     ],
 
-    'api' => [
-        'middleware' => ['api'],
-        'prefix' => 'api',
-        'guard' => 'sanctum',
+    'user' => [
+        'middleware' => ['web', 'splade'],
+        'prefix' => 'user',
+        'guard' => 'session',
     ],
 
 ];

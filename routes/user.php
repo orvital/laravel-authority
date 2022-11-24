@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Orvital\Authority\User\Http\Controllers\AccessTokenController;
-use Orvital\Authority\User\Http\Controllers\AccountController;
+use Orvital\Authority\Http\Controllers\AccessTokenController;
+use Orvital\Authority\Http\Controllers\AccountController;
 
 $middleware = [
     'auth' => implode(':', array_filter(['auth', config('authority.web.guard')])),

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Laravel\Sanctum\Sanctum;
-use Orvital\Authority\User\Models\AccessToken;
+use Orvital\Authority\Models\AccessToken;
 
 class AuthorityServiceProvider extends ServiceProvider
 {

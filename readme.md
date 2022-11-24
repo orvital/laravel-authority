@@ -6,6 +6,34 @@ Guards: `session`, `sanctum`
 Middleware Groups: `web`, `api`
 Middlewares: `auth`, `guest`
 
+## Routes
+GET|HEAD   auth/cookie            
+
+<!-- guest:session -->
+GET|HEAD   auth/access            
+POST       auth/access            
+GET|HEAD   auth/signup            
+POST       auth/signup            
+GET|HEAD   auth/forgot            
+POST       auth/forgot            
+GET|HEAD   auth/forgot/{token}    
+PUT        auth/forgot/{token}    
+
+<!-- auth:session -->
+DELETE     auth/access               auth/secured/access            
+GET|HEAD   auth/unlock               auth/secured/unlock            
+POST       auth/unlock               auth/secured/unlock            
+GET|HEAD   auth/verify               auth/secured/verify            
+POST       auth/verify               auth/secured/verify            
+GET|HEAD   auth/verify/{id}/{hash}   auth/secured/verify/{id}/{hash}
+
+GET|HEAD   user                   
+PUT        user                   
+POST       user                   
+GET|HEAD   user/tokens            
+POST       user/tokens            
+DELETE     user/tokens/{token}    
+
 ## Guest
 
 - /auth/login                       /auth/access            /auth
@@ -75,6 +103,30 @@ POST      api/token ............
 GET|HEAD  api/token ............
 DELETE    api/token ............
 GET|HEAD  api/users ............
+
+
+
+GET|HEAD  auth/cookie ............
+
+GET|HEAD  auth/access ............
+POST      auth/access ............
+DELETE    auth/access ............
+
+GET|HEAD  auth/signup ............
+POST      auth/signup ............
+
+GET|HEAD  auth/forgot ............
+POST      auth/forgot ............
+GET|HEAD  auth/forgot/{token} ....
+PUT       auth/forgot/{token} ....
+
+GET|HEAD  auth/unlock ............
+POST      auth/unlock ............
+
+GET|HEAD  auth/verify ............
+POST      auth/verify ............
+GET|HEAD  auth/verify/{id}/{hash} 
+
 
 
 GET|HEAD    auth/cookie

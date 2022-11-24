@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
-use Orvital\Authority\Auth\Http\Controllers\AuthenticateController;
-use Orvital\Authority\Auth\Http\Controllers\RegisterController;
-use Orvital\Authority\Email\Http\Controllers\VerificationController;
-use Orvital\Authority\Password\Http\Controllers\ConfirmationController;
-use Orvital\Authority\Password\Http\Controllers\RecoveryController;
+use Orvital\Authority\Http\Controllers\AuthenticateController;
+use Orvital\Authority\Http\Controllers\ConfirmationController;
+use Orvital\Authority\Http\Controllers\CsrfCookieController;
+use Orvital\Authority\Http\Controllers\RecoveryController;
+use Orvital\Authority\Http\Controllers\RegisterController;
+use Orvital\Authority\Http\Controllers\VerificationController;
 
 $middleware = [
     'auth' => implode(':', array_filter(['auth', config('authority.web.guard')])),
@@ -35,9 +35,6 @@ $middleware = [
  *
  * You must use the session authentication guard, and send the `Accept`: `application/json` header with the requests.
  */
-Route::controller(CsrfCookieController::class)->group(function () {
-    Route::get('cookie', 'show')->name('csrf');
-});
 
 /**
  * Guests
@@ -47,6 +44,8 @@ Route::middleware($middleware['guest'])->group(function () {
         Route::get('signup', 'create')->name('register');
         Route::post('signup', 'store');
     });
+
+    Route::get('cookie', [CsrfCookieController::class, 'show'])->name('csrf');
 
     Route::controller(AuthenticateController::class)->group(function () {
         Route::get('access', 'create')->name('login');

@@ -12,7 +12,7 @@ class LogoutController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request)
+    public function store(Request $request)
     {
         auth()->guard()->logout();
 

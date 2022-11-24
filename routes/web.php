@@ -71,9 +71,10 @@ Route::middleware($middleware['auth'])->group(function () {
     Route::delete('access', [AuthenticateController::class, 'destroy'])->name('logout');
 
     Route::controller(VerificationController::class)->group(function () {
-        Route::get('verify', 'index')->name('verification.notice');
-        Route::post('verify', 'store')->name('verification.send')->middleware('throttle:6,1');
-        Route::get('verify/{id}/{hash}', 'show')->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
+        Route::get('verification', 'index')->name('verification');
+        Route::post('verification', 'store')->middleware('throttle:6,1');
+
+        Route::get('verification/{id}/{hash}', 'show')->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
     });
 
     Route::controller(ConfirmationController::class)->group(function () {

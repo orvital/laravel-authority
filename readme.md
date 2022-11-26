@@ -6,6 +6,31 @@ Guards: `session`, `sanctum`
 Middleware Groups: `web`, `api`
 Middlewares: `auth`, `guest`
 
+users
+    id - integer
+    name - string
+ 
+roles
+    id - integer
+    name - string
+    permissions - array
+ 
+teams
+    id - integer
+    name - string
+ 
+teameables
+    team_id - integer
+    teamable_id - integer
+    teamable_type - string
+
+user->teams()
+role->teams()
+
+team->users()
+team->roles()
+
+
 ## Routes
 
 **guest**

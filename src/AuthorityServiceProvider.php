@@ -38,7 +38,7 @@ class AuthorityServiceProvider extends ServiceProvider
             ->group(function () {
                 $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
             });
-        
+
         Route::middleware(config('authority.user.middleware'))
             ->prefix(config('authority.user.prefix'))
             ->group(function () {

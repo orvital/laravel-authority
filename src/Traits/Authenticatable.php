@@ -55,6 +55,16 @@ trait Authenticatable
     }
 
     /**
+     * Set the password for the user.
+     *
+     * @return void
+     */
+    public function setAuthPassword($password)
+    {
+        $this->password = $this->getRehashedPassword($password);
+    }
+
+    /**
      * Rehash password if needed.
      *
      * @return string

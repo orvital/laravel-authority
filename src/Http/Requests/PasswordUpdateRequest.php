@@ -36,9 +36,12 @@ class PasswordUpdateRequest extends FormRequest
      */
     public function updatePassword(): array
     {
-        $this->user()->forceFill([
-            'password' => Hash::make($this->validated('password')),
-        ])->save();
+        $this->user()->setAuthPassword($this->validated('password'));
+        $this->user()->save();
+
+        // $this->user()->forceFill([
+        //     'password' => Hash::make($this->validated('password')),
+        // ])->save();
 
         return ['password' => __('Password Updated')];
     }

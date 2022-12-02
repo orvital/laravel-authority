@@ -47,11 +47,11 @@ class PasswordBroker implements PasswordBrokerContract
             return static::INVALID_USER;
         }
 
-        if ($this->tokens->recentlyCreatedToken($user)) {
+        if ($this->tokenRecentlyCreated($user)) {
             return static::RESET_THROTTLED;
         }
 
-        $token = $this->tokens->create($user);
+        $token = $this->createToken($user);
 
         if ($callback) {
             $callback($user, $token);
@@ -76,18 +76,16 @@ class PasswordBroker implements PasswordBrokerContract
             return static::INVALID_USER;
         }
 
-        if (! $this->tokens->exists($user, $credentials['token'])) {
+        if (! $this->tokenExists($user, $credentials['token'])) {
             return static::INVALID_TOKEN;
         }
-
-        $password = $credentials['password'];
 
         // Once the reset has been validated, we'll call the given callback with the
         // new password. This gives the user an opportunity to store the password
         // in their persistent storage. Then we'll delete the token and return.
-        $callback($user, $password);
+        $callback($user, $credentials['password']);
 
-        $this->tokens->delete($user);
+        $this->deleteToken($user);
 
         return static::PASSWORD_RESET;
     }
@@ -125,11 +123,19 @@ class PasswordBroker implements PasswordBrokerContract
     }
 
     /**
-     * Validate the given password reset token.
+     * Determine if the given password reset token exists and is valid.
      */
     public function tokenExists(CanResetPasswordContract $user, string $token): bool
     {
         return $this->tokens->exists($user, $token);
+    }
+
+    /**
+     * Determine if the given user recently created a password reset token.
+     */
+    public function tokenRecentlyCreated(CanResetPasswordContract $user): bool
+    {
+        return $this->tokens->recentlyCreatedToken($user);
     }
 
     /**

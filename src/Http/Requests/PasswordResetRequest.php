@@ -45,7 +45,8 @@ class PasswordResetRequest extends FormRequest
         $status = Password::reset(
             $this->safe(['email', 'password', 'password_confirmation', 'token']),
             function ($user, $password) {
-                $user->password = Hash::make($password);
+                // $user->password = Hash::make($password);
+                $user->setAuthPassword($password);
                 $user->setRememberToken(Str::random(60));
                 $user->save();
 

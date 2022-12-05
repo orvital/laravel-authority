@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Orvital\Authority\Http\Controllers\AuthenticationController;
 use Orvital\Authority\Http\Controllers\ConfirmationController;
 use Orvital\Authority\Http\Controllers\CsrfCookieController;
-use Orvital\Authority\Http\Controllers\LoginController;
-use Orvital\Authority\Http\Controllers\LogoutController;
 use Orvital\Authority\Http\Controllers\RecoveryController;
 use Orvital\Authority\Http\Controllers\RegisterController;
 use Orvital\Authority\Http\Controllers\VerificationController;
@@ -17,17 +16,21 @@ $middleware = [
 Route::get('cookie', [CsrfCookieController::class, 'show'])->name('csrf');
 
 /**
+ * Authentication
+ */
+Route::controller(AuthenticationController::class)->group(function () use ($middleware) {
+    Route::get('access', 'create')->middleware($middleware['guest'])->name('login');
+    Route::post('access', 'store')->middleware($middleware['guest']);
+    Route::delete('access', 'destroy')->middleware($middleware['auth']);
+});
+
+/**
  * Guests
  */
 Route::middleware($middleware['guest'])->group(function () {
     Route::controller(RegisterController::class)->group(function () {
         Route::get('signup', 'create')->name('register');
         Route::post('signup', 'store');
-    });
-
-    Route::controller(LoginController::class)->group(function () {
-        Route::get('access', 'create')->name('login');
-        Route::post('access', 'store');
     });
 
     Route::controller(RecoveryController::class)->group(function () {
@@ -42,8 +45,6 @@ Route::middleware($middleware['guest'])->group(function () {
  * Authenticated
  */
 Route::middleware($middleware['auth'])->group(function () {
-    Route::post('logout', [LogoutController::class, 'store'])->name('logout');
-
     Route::controller(VerificationController::class)->group(function () {
         Route::get('verify', 'index')->name('verification');
         Route::post('verify', 'store')->middleware('throttle:6,1');

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Orvital\Authority\Http\Requests\LoginRequest;
 
-class LoginController extends Controller
+class AuthenticationController extends Controller
 {
     /**
      * Display the login view.
@@ -19,7 +19,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
+     * Handle the login request.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -28,5 +28,19 @@ class LoginController extends Controller
         $request->login();
 
         return redirect()->intended(config('authority.home'));
+    }
+
+    /**
+     * Handle the logout request.
+     */
+    public function destroy(Request $request)
+    {
+        auth()->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }

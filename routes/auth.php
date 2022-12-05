@@ -54,5 +54,4 @@ Route::middleware($middleware['auth'])->group(function () {
         Route::get('unlock', 'show')->name('confirmation');
         Route::post('unlock', 'store')->middleware('throttle:6,1');
     });
-
 });

@@ -27,8 +27,6 @@ class LoginController extends Controller
     {
         $request->login();
 
-        $request->session()->regenerate();
-
         return redirect()->intended(config('authority.home'));
     }
 }

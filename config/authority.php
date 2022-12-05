@@ -30,13 +30,13 @@ return [
     ],
 
     'auth' => [
-        'middleware' => ['web', 'splade'],
+        'middleware' => ['web'],
         'prefix' => 'auth',
         'guard' => 'session',
     ],
 
     'user' => [
-        'middleware' => ['web', 'splade'],
+        'middleware' => ['web'],
         'prefix' => 'user',
         'guard' => 'session',
     ],

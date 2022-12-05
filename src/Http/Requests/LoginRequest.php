@@ -4,6 +4,7 @@ namespace Orvital\Authority\Http\Requests;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
@@ -38,11 +39,10 @@ class LoginRequest extends FormRequest
             $seconds = RateLimiter::availableIn($limiterKey);
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.throttle', [
-                    'seconds' => $seconds,
-                    'minutes' => ceil($seconds / 60),
-                ]),
-            ]);
+                'email' => [
+                    trans('auth.throttle', ['seconds' => $seconds, 'minutes' => ceil($seconds / 60)]),
+                ],
+            ])->status(Response::HTTP_TOO_MANY_REQUESTS);
         }
 
         // Attempt to authenticate a user using the given credentials.
@@ -53,6 +53,8 @@ class LoginRequest extends FormRequest
                 'email' => [trans('auth.failed')],
             ]);
         }
+
+        $this->session()->regenerate();
 
         RateLimiter::clear($limiterKey);
     }

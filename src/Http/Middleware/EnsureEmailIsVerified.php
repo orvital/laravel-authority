@@ -3,11 +3,12 @@
 namespace Orvital\Authority\Http\Middleware;
 
 use Closure;
+use Illuminate\Auth\Middleware\EnsureEmailIsVerified as Middleware;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 
-class EnsureEmailIsVerified
+class EnsureEmailIsVerified extends Middleware
 {
     /**
      * Handle an incoming request.

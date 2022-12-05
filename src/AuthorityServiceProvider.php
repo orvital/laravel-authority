@@ -25,8 +25,6 @@ class AuthorityServiceProvider extends ServiceProvider
             __DIR__.'/../config/authority.php' => $this->app->configPath('authority.php'),
         ]);
 
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
         Route::middleware(config('authority.api.middleware'))
             ->prefix(config('authority.api.prefix'))
             ->group(function () {

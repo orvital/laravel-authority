@@ -2,41 +2,34 @@
 
 namespace Orvital\Authority\Password;
 
-use Illuminate\Contracts\Auth\PasswordBrokerFactory as FactoryContract;
+use Illuminate\Contracts\Auth\PasswordBrokerFactory as PasswordBrokerFactoryContract;
+use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 use InvalidArgumentException;
 
-class PasswordBrokerManager implements FactoryContract
+class PasswordBrokerManager implements PasswordBrokerFactoryContract
 {
     /**
      * The application instance.
-     *
-     * @var \Illuminate\Contracts\Foundation\Application
      */
-    protected $app;
+    protected ApplicationContract $app;
 
     /**
      * The array of created "drivers".
-     *
-     * @var array
      */
-    protected $brokers = [];
+    protected array $brokers = [];
 
     /**
      * Create a new PasswordBroker manager instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
      * @return void
      */
-    public function __construct($app)
+    public function __construct(ApplicationContract $app)
     {
         $this->app = $app;
     }
 
     /**
-     * Attempt to get the broker from the local cache.
-     *
-     * @param  string|null  $name
-     * @return \Illuminate\Contracts\Auth\PasswordBroker
+     * {@inheritdoc}
      */
     public function broker($name = null)
     {
@@ -84,32 +77,24 @@ class PasswordBrokerManager implements FactoryContract
 
     /**
      * Get the password broker configuration.
-     *
-     * @param  string  $name
-     * @return array
      */
-    protected function getConfig($name)
+    protected function getConfig(string $name): array
     {
         return $this->app['config']["auth.passwords.{$name}"];
     }
 
     /**
      * Get the default password broker name.
-     *
-     * @return string
      */
-    public function getDefaultDriver()
+    public function getDefaultDriver(): string
     {
         return $this->app['config']['auth.defaults.passwords'];
     }
 
     /**
      * Set the default password broker name.
-     *
-     * @param  string  $name
-     * @return void
      */
-    public function setDefaultDriver($name)
+    public function setDefaultDriver(string $name): void
     {
         $this->app['config']['auth.defaults.passwords'] = $name;
     }

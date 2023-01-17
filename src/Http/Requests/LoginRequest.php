@@ -30,7 +30,7 @@ class LoginRequest extends FormRequest
      */
     public function login(): void
     {
-        $limiterKey = $this->throttleKey();
+        $limiterKey = Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
 
         // Check if the request has too many failed login attempts.
         if (RateLimiter::tooManyAttempts($limiterKey, 5)) {
@@ -57,13 +57,5 @@ class LoginRequest extends FormRequest
         $this->session()->regenerate();
 
         RateLimiter::clear($limiterKey);
-    }
-
-    /**
-     * Get the rate limiting throttle key for the request.
-     */
-    public function throttleKey(): string
-    {
-        return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
     }
 }

@@ -3,8 +3,8 @@
 namespace Orvital\Authority\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Orvital\Authority\Facades\Authority;
 
 class TokenCreateRequest extends FormRequest
 {
@@ -16,7 +16,7 @@ class TokenCreateRequest extends FormRequest
         return [
             'email' => ['required', 'max:192', 'email'],
             'password' => ['required', 'max:192'],
-            'token_name' => ['required', 'max:192'],
+            'name' => ['required', 'max:192'],
         ];
     }
 
@@ -27,16 +27,14 @@ class TokenCreateRequest extends FormRequest
      */
     public function createToken()
     {
-        $provider = Auth::guard()->getProvider();
+        $user = Authority::getUser($this->only(['email', 'password']));
 
-        $user = $provider->retrieveByCredentials($this->only('email'));
-
-        if (! $user || ! $provider->validateCredentials($user, $this->only('password'))) {
+        if (! $user) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
 
-        return $user->createToken($this->token_name);
+        return $user->createToken($this->name);
     }
 }

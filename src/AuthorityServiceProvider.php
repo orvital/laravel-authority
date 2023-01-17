@@ -14,6 +14,10 @@ class AuthorityServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/authority.php', 'authority');
+
+        $this->app->singleton('authority', function ($app) {
+            return new Authority($app);
+        });
     }
 
     /**

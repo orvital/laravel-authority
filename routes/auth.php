@@ -5,7 +5,7 @@ use Orvital\Authority\Http\Controllers\AuthenticationController;
 use Orvital\Authority\Http\Controllers\ConfirmationController;
 use Orvital\Authority\Http\Controllers\CsrfCookieController;
 use Orvital\Authority\Http\Controllers\RecoveryController;
-use Orvital\Authority\Http\Controllers\RegisterController;
+use Orvital\Authority\Http\Controllers\RegistrationController;
 use Orvital\Authority\Http\Controllers\VerificationController;
 
 $middleware = [
@@ -28,7 +28,7 @@ Route::controller(AuthenticationController::class)->group(function () use ($midd
  * Guests
  */
 Route::middleware($middleware['guest'])->group(function () {
-    Route::controller(RegisterController::class)->group(function () {
+    Route::controller(RegistrationController::class)->group(function () {
         Route::get('signup', 'create')->name('register');
         Route::post('signup', 'store');
     });

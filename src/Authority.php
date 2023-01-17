@@ -2,8 +2,11 @@
 
 namespace Orvital\Authority;
 
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class Authority
 {
@@ -23,11 +26,9 @@ class Authority
     }
 
     /**
-     * Get the user for the given credentials.
-     *
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     * Finds a user by the given credentials.
      */
-    public function getUser(array $credentials)
+    public function findByCredentials(array $credentials): ?Authenticatable
     {
         $provider = $this->getProvider();
 
@@ -38,6 +39,26 @@ class Authority
         }
 
         return null;
+    }
+
+    /**
+     * Register a user with the given credentials.
+     */
+    public function register(array $credentials, bool $login = true): Authenticatable
+    {
+        $provider = $this->getProvider();
+
+        $credentials['password'] = $provider->getHasher()->make($credentials['password']);
+
+        $user = $provider->createModel()->create($credentials);
+
+        event(new Registered($user));
+
+        if ($login) {
+            Auth::login($user);
+        }
+
+        return $user;
     }
 
     /**

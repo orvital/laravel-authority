@@ -27,7 +27,7 @@ class TokenCreateRequest extends FormRequest
      */
     public function createToken()
     {
-        $user = Authority::getUser($this->only(['email', 'password']));
+        $user = Authority::findByCredentials($this->only(['email', 'password']));
 
         if (! $user) {
             throw ValidationException::withMessages([

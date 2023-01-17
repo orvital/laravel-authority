@@ -4,9 +4,10 @@ namespace Orvital\Authority\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Orvital\Authority\Facades\Authority;
 use Orvital\Authority\Http\Requests\RegistrationRequest;
 
-class RegisterController extends Controller
+class RegistrationController extends Controller
 {
     /**
      * Display the registration view.
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      */
     public function store(RegistrationRequest $request)
     {
-        $request->register();
+        $user = Authority::register($request->validated());
 
         return redirect(config('authority.home'));
     }

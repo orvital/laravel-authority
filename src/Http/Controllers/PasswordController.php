@@ -2,18 +2,19 @@
 
 namespace Orvital\Authority\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Orvital\Authority\Http\Requests\PasswordUpdateRequest;
+use Orvital\Authority\Actions\UpdateUserPassword;
 
 class PasswordController extends Controller
 {
     /**
-     * Update the user name and email.
+     * Update the user password.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(PasswordUpdateRequest $request)
+    public function update(Request $request, UpdateUserPassword $action)
     {
-        return back()->with($request->updatePassword());
+        return back()->with($action->update($request->user(), $request->all()));
     }
 }

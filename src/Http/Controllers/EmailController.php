@@ -4,16 +4,16 @@ namespace Orvital\Authority\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Orvital\Authority\Actions\UpdateUserProfile;
+use Orvital\Authority\Actions\UpdateUserEmail;
 
-class ProfileController extends Controller
+class EmailController extends Controller
 {
     /**
-     * Update the user profile.
+     * Update the user email.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, UpdateUserProfile $action)
+    public function update(Request $request, UpdateUserEmail $action)
     {
         return back()->with($action->update($request->user(), $request->all()));
     }

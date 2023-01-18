@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-use Orvital\Authority\Http\Controllers\UserController;
 use Orvital\Authority\Http\Controllers\AccessTokenController;
+use Orvital\Authority\Http\Controllers\EmailController;
 use Orvital\Authority\Http\Controllers\PasswordController;
 use Orvital\Authority\Http\Controllers\ProfileController;
+use Orvital\Authority\Http\Controllers\UserController;
 
 $middleware = [
     'auth' => implode(':', array_filter(['auth', config('authority.user.guard')])),
@@ -18,6 +18,7 @@ $middleware = [
 Route::middleware($middleware['auth'])->group(function () {
     Route::get('', [UserController::class, 'show'])->name('user');
     Route::put('profile', [ProfileController::class, 'update'])->name('user.profile');
+    Route::put('email', [EmailController::class, 'update'])->name('user.email');
     Route::put('password', [PasswordController::class, 'update'])->name('user.password');
 
     Route::controller(AccessTokenController::class)->group(function () {

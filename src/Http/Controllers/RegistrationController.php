@@ -4,8 +4,7 @@ namespace Orvital\Authority\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Orvital\Authority\Facades\Authority;
-use Orvital\Authority\Http\Requests\RegistrationRequest;
+use Orvital\Authority\Actions\CreateUser;
 
 class RegistrationController extends Controller
 {
@@ -26,9 +25,9 @@ class RegistrationController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(RegistrationRequest $request)
+    public function store(Request $request, CreateUser $action)
     {
-        $user = Authority::register($request->validated());
+        $user = $action->create($request->all());
 
         return redirect(config('authority.home'));
     }

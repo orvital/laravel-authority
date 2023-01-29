@@ -2,7 +2,7 @@
     "name": "orvital/laravel-authority",
     "description": "Custom Authentication for Laravel",
     "type": "library",
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "Jona Goldman",

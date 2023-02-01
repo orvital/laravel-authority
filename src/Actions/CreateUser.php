@@ -3,6 +3,7 @@
 namespace Orvital\Authority\Actions;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password as PasswordRule;
@@ -29,7 +30,9 @@ class CreateUser
     {
         $validated = Validator::make($attributes, $this->rules())->validate();
 
-        $user = Authority::register($validated);
+        $validated['password'] = Hash::make($validated['password']);
+
+        $user = Authority::newUserModel()->create($validated);
 
         return $user;
     }

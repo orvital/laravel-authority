@@ -4,7 +4,6 @@ namespace Orvital\Authority\Http\Requests;
 
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password as PasswordRule;
@@ -45,7 +44,6 @@ class PasswordResetRequest extends FormRequest
         $status = Password::reset(
             $this->safe(['email', 'password', 'password_confirmation', 'token']),
             function ($user, $password) {
-                // $user->password = Hash::make($password);
                 $user->setAuthPassword($password);
                 $user->setRememberToken(Str::random(60));
                 $user->save();

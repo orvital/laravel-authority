@@ -26,8 +26,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Orvital\\Authority\\AuthorityServiceProvider",
-                "Orvital\\Authority\\Password\\PasswordResetServiceProvider"
+                "Orvital\\Authority\\AuthorityServiceProvider"
             ]
         }
     }

@@ -2,9 +2,9 @@
 
 ## Authentication
 
-Guards: `session`, `sanctum`
-Middleware Groups: `web`, `api`
-Middlewares: `auth`, `guest`
+Guards:             `session`, `sanctum`
+Middleware Groups:  `web`, `api`
+Middlewares:        `auth`, `guest`
 
 users
     id - integer
